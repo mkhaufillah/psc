@@ -18,7 +18,7 @@ struct SearchMaterialProvider: ProviderGetProtocolWithOptionalData {
     
     init(indexLocalData: Int = 0, keyword: String, courseId: String, page: Int) {
         self.indexLocalData = indexLocalData
-        self.keyword = keyword
+        self.keyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
         self.courseId = courseId
         self.page = page
     }

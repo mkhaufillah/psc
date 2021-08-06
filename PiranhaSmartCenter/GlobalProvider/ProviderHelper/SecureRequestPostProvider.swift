@@ -10,9 +10,11 @@ import RealmSwift
 
 struct SecureRequestPostProvider<RequestModel: Codable, ResponseModel: Codable> {
     let url: String
+    let isConvertToSnackCase: Bool
     
-    init(url: String) {
+    init(url: String, isConvertToSnackCase: Bool = true) {
         self.url = url
+        self.isConvertToSnackCase = isConvertToSnackCase
     }
     
     func doAction(request: RequestModel, response: @escaping (ResponseModel?, AppError?) -> Void) {
@@ -31,7 +33,7 @@ struct SecureRequestPostProvider<RequestModel: Codable, ResponseModel: Codable> 
         }
         
         // Encode Object to Data
-        let (requestData, err) = JSONHelper<RequestModel>().encode(object: request)
+        let (requestData, err) = JSONHelper<RequestModel>(isConvertToSnackCase: isConvertToSnackCase).encode(object: request)
         if err != nil {
             response(nil, err)
             return

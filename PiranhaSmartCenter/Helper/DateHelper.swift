@@ -12,7 +12,14 @@ struct DateHelper {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = format
-        return dateFormatter.date(from:s)!
+        return dateFormatter.date(from:s) ?? Date()
+    }
+    
+    static func dateToString(d: Date, format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: d)
     }
     
     static func stringToRelativeDate(s: String, format: String) -> String {

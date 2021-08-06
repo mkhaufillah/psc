@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RootView: View {
-    @ObservedObject var rootViewModel = RootViewModel()
+    @StateObject var rootViewModel = RootViewModel()
     
     var body: some View {
         if rootViewModel.dataUser == nil {
@@ -16,11 +16,19 @@ struct RootView: View {
         } else {
             NavigationView {
                 ZStack {
-                    NavigationLink(destination: BecomeMemberView(), isActive: $rootViewModel.becomeMemberPageIsActive) {
+                    NavigationLink(
+                        destination: BecomeMemberView(
+                            isRootActive: $rootViewModel.becomeMemberPageIsActive
+                        ),
+                        isActive: $rootViewModel.becomeMemberPageIsActive
+                    ) {
                         EmptyView()
                     }
                     if rootViewModel.currentTab != .Exam {
                         LinearGradient(gradient: Gradient(colors: [Color("BackgroundAccentColor"), Color("BackgroundAccent2Color")]), startPoint: .leading, endPoint: .trailing)
+                            .ignoresSafeArea()
+                    } else {
+                        Color("BackgroundColor")
                             .ignoresSafeArea()
                     }
                     GeometryReader { geometry in
@@ -85,33 +93,56 @@ struct RootView: View {
                                         tabName: RootString.course,
                                         assignedPage: .Course
                                     )
-                                    Button(action: {
-                                        withAnimation {
-                                            rootViewModel.isShowPopupMenu.toggle()
+                                    if rootViewModel.dataUser?.statusAccount != "verified" {
+                                        Button(action: {
+                                            withAnimation {
+                                                rootViewModel.isShowPopupMenu.toggle()
+                                            }
+                                        }) {
+                                            ZStack(alignment: .center) {
+                                                Circle()
+                                                    .foregroundColor(
+                                                        rootViewModel.isShowPopupMenu ?
+                                                            Color("ForegroundColor")
+                                                            :Color("ForegroundLayer1Color")
+                                                    )
+                                                    .frame(width: geometry.size.width/7, height: geometry.size.width/7)
+                                                    .shadow(radius: 4)
+                                                Image(systemName: "command.circle.fill")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(
+                                                        width: geometry.size.width/7-6 < 0 ? 0 : geometry.size.width/7-6,
+                                                        height: geometry.size.width/7-6 < 0 ? 0 : geometry.size.width/7-6
+                                                    )
+                                                    .foregroundColor(Color("BackgroundLayer1Color"))
+                                                    .rotationEffect(Angle(degrees: rootViewModel.isShowPopupMenu ? 90 : 0))
+                                            }
                                         }
-                                    }) {
-                                        ZStack(alignment: .center) {
-                                            Circle()
-                                                .foregroundColor(
-                                                    rootViewModel.isShowPopupMenu ?
-                                                        Color("ForegroundColor")
-                                                        :Color("ForegroundLayer1Color")
-                                                )
-                                                .frame(width: geometry.size.width/7, height: geometry.size.width/7)
-                                                .shadow(radius: 4)
-                                            Image(systemName: "command.circle.fill")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(
-                                                    width: geometry.size.width/7-6 < 0 ? 0 : geometry.size.width/7-6,
-                                                    height: geometry.size.width/7-6 < 0 ? 0 : geometry.size.width/7-6
-                                                )
-                                                .foregroundColor(Color("BackgroundLayer1Color"))
-                                                .rotationEffect(Angle(degrees: rootViewModel.isShowPopupMenu ? 90 : 0))
+                                        .buttonStyle(DefaultButtonStyleHelper())
+                                        .offset(y: rootViewModel.isShowPopupMenu ? -geometry.size.height/8/2.5 : -geometry.size.height/8/3)
+                                    } else {
+                                        Button(action: {
+                                            rootViewModel.openWhatsapp()
+                                        }) {
+                                            ZStack(alignment: .center) {
+                                                Circle()
+                                                    .foregroundColor(Color("ForegroundLayer1Color"))
+                                                    .frame(width: geometry.size.width/7, height: geometry.size.width/7)
+                                                    .shadow(radius: 4)
+                                                Image(systemName: "message.circle.fill")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(
+                                                        width: geometry.size.width/7-6 < 0 ? 0 : geometry.size.width/7-6,
+                                                        height: geometry.size.width/7-6 < 0 ? 0 : geometry.size.width/7-6
+                                                    )
+                                                    .foregroundColor(Color("BackgroundLayer1Color"))
+                                            }
                                         }
+                                        .buttonStyle(DefaultButtonStyleHelper())
+                                        .offset(y: -geometry.size.height/8/3)
                                     }
-                                    .buttonStyle(DefaultButtonStyleHelper())
-                                    .offset(y: rootViewModel.isShowPopupMenu ? -geometry.size.height/8/2.5 : -geometry.size.height/8/3)
                                     TabBarIconComponentView(
                                         width: geometry.size.width/5,
                                         height: geometry.size.height/28,
@@ -139,7 +170,6 @@ struct RootView: View {
                 }
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
-                .background(Color("BackgroundColor"))
             }
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)

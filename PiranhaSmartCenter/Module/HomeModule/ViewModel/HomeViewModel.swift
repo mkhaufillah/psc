@@ -9,4 +9,5 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     @Published var exercisePageIsActive: Bool = false
+    @Published var isOpenBecomeMemberRecomendation: Bool = false
 }

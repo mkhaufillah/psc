@@ -136,12 +136,42 @@ class RootViewModel: ObservableObject {
         profileProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    NotificationHelper.showErrorNotification(title: ErrorString.shortTitle + RootString.getUserData, subtitle: error?.desc ?? "")
+                    NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle + RootString.getUserData, subtitle: error?.desc ?? "")
                     self.dataStatusUser = .InLocal
                 }
                 if result != nil {
                     self.dataUser = result?.data?.data.first
                     self.dataStatusUser = .InNetwork
+                    
+                    // Update in local user
+                    do {
+                        let realm = try Realm()
+                        
+                        let data = realm.objects(SignInDataModel.self)
+                        
+                        if let firstData = data.first {
+                            try realm.write {
+                                firstData.user?.name = self.dataUser?.name
+                                firstData.user?.email = self.dataUser?.email
+                                firstData.user?.emailVerifiedAt = self.dataUser?.emailVerifiedAt
+                                firstData.user?.noHp = self.dataUser?.noHp
+                                firstData.user?.address = self.dataUser?.address
+                                firstData.user?.gender = self.dataUser?.gender
+                                firstData.user?.picture = self.dataUser?.picture
+                                firstData.user?.birthdate = self.dataUser?.birthdate
+                                firstData.user?.statusAccount = self.dataUser?.statusAccount
+                                firstData.user?.role = self.dataUser?.role
+                                firstData.user?.createdAt = self.dataUser?.createdAt
+                                firstData.user?.updatedAt = self.dataUser?.updatedAt
+                                firstData.user?.deletedAt = self.dataUser?.deletedAt
+                                firstData.user?.referenceId = self.dataUser?.referenceId
+                                firstData.user?.education = self.dataUser?.education
+                                firstData.user?.detailReferenceEtc = self.dataUser?.detailReferenceEtc
+                            }
+                        }
+                    } catch {
+                        NotificationComponentView.showErrorNotification(title: ErrorString.title, subtitle: ErrorString.failAddLocalUserData)
+                    }
                 }
                 self.homeRefresh = false
                 self.profileRefresh = false
@@ -155,7 +185,7 @@ class RootViewModel: ObservableObject {
         recapCourseProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    NotificationHelper.showErrorNotification(title: ErrorString.shortTitle + RootString.getRecapCoursesData, subtitle: error?.desc ?? "")
+                    NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle + RootString.getRecapCoursesData, subtitle: error?.desc ?? "")
                     self.dataStatusRecapCourses = .NotInLocal
                 }
                 
@@ -192,7 +222,7 @@ class RootViewModel: ObservableObject {
         courseProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    NotificationHelper.showErrorNotification(title: ErrorString.shortTitle + RootString.getCoursesData, subtitle: error?.desc ?? "")
+                    NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle + RootString.getCoursesData, subtitle: error?.desc ?? "")
                     self.dataStatusCourses = .NotInLocal
                 }
                 if result != nil {
@@ -238,15 +268,20 @@ class RootViewModel: ObservableObject {
             // Set result to local data
             DispatchQueue.main.async {
                 if error != nil {
-                    if self.materialKeyword != "" && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                    if isSearch && ((error?.desc ?? "") == ErrorString.decodeFailed) {
                         self.dataMaterials[i] = []
                         self.dataStatusMaterials[i] = .InNetwork
                     } else if isNextPage && ((error?.desc ?? "") == ErrorString.decodeFailed) {
                         self.dataStatusMaterialsPerPage[i] = .InNetwork
                         self.isFinalPage[i] = true
                     } else {
-                        NotificationHelper.showErrorNotification(title: ErrorString.shortTitle + RootString.getMaterialData, subtitle: error?.desc ?? "")
-                        self.dataStatusMaterials[i] = .NotInLocal
+                        if self.materialKeyword != "" && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                            self.dataMaterials[i] = []
+                            self.dataStatusMaterials[i] = .InNetwork
+                        } else {
+                            NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle + RootString.getMaterialData, subtitle: error?.desc ?? "")
+                            self.dataStatusMaterials[i] = .NotInLocal
+                        }
                     }
                 }
                 if result != nil {
@@ -276,7 +311,7 @@ class RootViewModel: ObservableObject {
         publicationProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    NotificationHelper.showErrorNotification(title: ErrorString.shortTitle + RootString.getPublicationsData, subtitle: error?.desc ?? "")
+                    NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle + RootString.getPublicationsData, subtitle: error?.desc ?? "")
                     self.dataStatusPublications = .NotInLocal
                 }
                 
@@ -295,7 +330,7 @@ class RootViewModel: ObservableObject {
         activityProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    NotificationHelper.showErrorNotification(title: ErrorString.shortTitle + RootString.getAcyivitiesData, subtitle: error?.desc ?? "")
+                    NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle + RootString.getAcyivitiesData, subtitle: error?.desc ?? "")
                     self.dataStatusActivities = .NotInLocal
                 }
                 
@@ -310,7 +345,7 @@ class RootViewModel: ObservableObject {
     
     func openWhatsapp() {
         if (WhatsappHelper.doOpen(number: RootString.phoneNumberPSC, text: RootString.chatText) != nil) {
-            NotificationHelper.showErrorNotification(title: ErrorString.title, subtitle: ErrorString.whatsappCannotOpened)
+            NotificationComponentView.showErrorNotification(title: ErrorString.title, subtitle: ErrorString.whatsappCannotOpened)
         }
     }
 }

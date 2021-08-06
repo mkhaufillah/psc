@@ -1,5 +1,5 @@
 //
-//  NotificationHelper.swift
+//  NotificationComponentView.swift
 //  PiranhaSmartCenter
 //
 //  Created by mohammad.khaufillah on 18/07/21.
@@ -8,7 +8,7 @@
 import NotificationBannerSwift
 import SwiftUI
 
-struct NotificationHelper {
+struct NotificationComponentView {
     static func showSuccessNotification(title: String, subtitle: String) {
         let banner = NotificationBanner(title: title, subtitle: subtitle, style: .success, colors: BannerCustomColorsComponentView())
         banner.show()

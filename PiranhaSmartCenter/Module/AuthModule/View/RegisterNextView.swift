@@ -14,6 +14,8 @@ struct RegisterNextView: View {
     
     @EnvironmentObject var registerViewModel: RegisterViewModel
     
+    @GestureState private var dragOffset = CGSize.zero
+    
     var body: some View {
         RegisterBackgroundComponentView() {
             VStack(alignment: .center, spacing: 16) {
@@ -21,7 +23,7 @@ struct RegisterNextView: View {
                     EmptyView()
                 }
                 // Upload photo
-                ButtonComponentView.bigRectangleImageButton(
+                ButtonComponentView.bigRoundedImageButton(
                     title: RegisterString.uploadPhoto,
                     action: {
                         hideKeyboard()
@@ -46,7 +48,6 @@ struct RegisterNextView: View {
                 HStack(alignment: .center, spacing: 16) {
                     // Back to login page
                     ButtonComponentView.secondaryFullButton(title: RegisterString.back, action: {
-                        hideKeyboard()
                         presentationMode.wrappedValue.dismiss()
                     }, isDisabled: registerViewModel.isLoading, leadingImg: "chevron.backward")
                     .disabled(registerViewModel.isLoading)
@@ -82,6 +83,14 @@ struct RegisterNextView: View {
                 }
             )
         }
+        .onDisappear {
+            hideKeyboard()
+        }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 && value.translation.width > 100) {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }))
     }
 }
 

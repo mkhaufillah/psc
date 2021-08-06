@@ -8,6 +8,12 @@
 import Foundation
 
 struct ResponseProvider<ResponseModel: Codable> {
+    let isConvertToSnackCase: Bool
+    
+    init(isConvertToSnackCase: Bool = true) {
+        self.isConvertToSnackCase = isConvertToSnackCase
+    }
+    
     func responseResult(data: Data?, res: URLResponse?, error: Error?) -> (ResponseModel?, AppError?) {
         // If has app error
         guard error == nil else {
@@ -44,11 +50,11 @@ struct ResponseProvider<ResponseModel: Codable> {
             }
             
             // Decode fail 1 result
-            let (response1Object, err) = JSONHelper<Error1ResponseModel>().decode(data: data)
+            let (response1Object, err) = JSONHelper<Error1ResponseModel>(isConvertToSnackCase: isConvertToSnackCase).decode(data: data)
             // If server send error type 2
             if err != nil {
                 // Decode fail 2 result
-                let (response2Object, err) = JSONHelper<Error2ResponseModel>().decode(data: data)
+                let (response2Object, err) = JSONHelper<Error2ResponseModel>(isConvertToSnackCase: isConvertToSnackCase).decode(data: data)
                 if err != nil {
                     return (nil, err)
                 }
@@ -76,7 +82,7 @@ struct ResponseProvider<ResponseModel: Codable> {
         }
         
         // Decode success result
-        let (responseObject, err) = JSONHelper<ResponseModel>().decode(data: data)
+        let (responseObject, err) = JSONHelper<ResponseModel>(isConvertToSnackCase: isConvertToSnackCase).decode(data: data)
         if err != nil {
             return (nil, err)
         }

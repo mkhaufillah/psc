@@ -25,5 +25,5 @@ struct RegisterString: StringProtocol {
     static let selectProfilePictureSource = "Pilih salah satu sumber gambar"
     static let camera = "Kamera"
     static let photoLibrary = "Galeri Foto"
-    static let successfullyregister = "Sukses mendaftar, silahkan masuk ke akun baru anda"
+    static let successfullyregister = "Sukses mendaftar.\n\nLink konfirmasi telah dikirim, silahkan cek \"Email\" anda.\n\nSelanjutnya silahkan masuk ke akun baru anda"
 }

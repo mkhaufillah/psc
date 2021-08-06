@@ -36,4 +36,10 @@ struct ErrorString : StringProtocol {
     static let passwordUnmatch = "\"Kata Sandi\" tidak sama"
     // Whatsapp
     static let whatsappCannotOpened = "\"Whatsapp\" tidak bisa dibuka"
+    // Video
+    static let audioSystemError = "\"Audio\" sistem anda bermasalah"
+    // Data
+    static let notFoundData = "\"Data\" tidak ditemukan"
+    static let failedToLoadData = "\"Data\" gagal dimuat"
+    static let retry = "ulangi"
 }

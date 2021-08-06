@@ -15,15 +15,17 @@ struct ButtonTopBarComponentView: View {
         foregroundColorImg: String,
         foregroundColorText: String,
         icon: String,
-        action: () -> Void
+        action: () -> Void,
+        isLoading: Bool
     
-    init (title: String, backgroundColorImg: String, foregroundColorImg: String, foregroundColorText: String, icon: String, action: @escaping () -> Void) {
+    init (title: String, backgroundColorImg: String, foregroundColorImg: String, foregroundColorText: String, icon: String, action: @escaping () -> Void, isLoading: Bool) {
         self.title = title
         self.backgroundColorImg = backgroundColorImg
         self.foregroundColorImg = foregroundColorImg
         self.foregroundColorText = foregroundColorText
         self.icon = icon
         self.action = action
+        self.isLoading = isLoading
     }
     
     var body: some View {
@@ -47,6 +49,7 @@ struct ButtonTopBarComponentView: View {
                 }
             }
             .buttonStyle(DefaultButtonStyleHelper())
+            .disabled(isLoading)
         }
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     private let bounds = UIScreen.main.bounds
     
-    @ObservedObject var homeViewModel = HomeViewModel()
+    @StateObject var homeViewModel = HomeViewModel()
     
     @EnvironmentObject var rootViewModel: RootViewModel
     
@@ -23,7 +23,7 @@ struct HomeView: View {
             if rootViewModel.homeRefresh == false {
                 Spacer()
                 ZStack {
-                    NavigationLink(destination: ExerciseView(), isActive: $homeViewModel.exercisePageIsActive) {
+                    NavigationLink(destination: ExerciseView().environmentObject(homeViewModel), isActive: $homeViewModel.exercisePageIsActive) {
                         EmptyView()
                     }
                     VStack(alignment: .leading, spacing: 0) {
@@ -56,7 +56,7 @@ struct HomeView: View {
                                     Text(HomeString.publications)
                                         .fontWeight(.bold)
                                     Spacer()
-                                    Button(action: {}) {
+                                    NavigationLink(destination: PublicationListView()) {
                                         Text(HomeString.more)
                                     }
                                 }
@@ -83,7 +83,7 @@ struct HomeView: View {
                                     Text(HomeString.activities)
                                         .fontWeight(.bold)
                                     Spacer()
-                                    Button(action: {}) {
+                                    NavigationLink(destination: ActivityListView()) {
                                         Text(HomeString.more)
                                     }
                                 }
@@ -125,6 +125,13 @@ struct HomeView: View {
                 .frame(width: bounds.size.width, height: bounds.size.height/2, alignment: .center)
             }
         }
+        .sheet(isPresented: $homeViewModel.isOpenBecomeMemberRecomendation) {
+            NotActivatedAccount(
+                title: HomeString.premiumMemberAlertTitle,
+                subtitle: HomeString.premiumMemberAlertSubitle,
+                desc: HomeString.premiumMemberAlertDesc
+            )
+        }
     }
     
     private var shortUserInfo: some View {
@@ -138,13 +145,28 @@ struct HomeView: View {
     }
     
     private var topBanner: some View {
-        TopBannerComponentView(actionCourse: {
-            rootViewModel.currentTab = .Course
-        }, actionExercise: {
-            homeViewModel.exercisePageIsActive = true
-        }, actionExam: {
-            rootViewModel.currentTab = .Exam
-        })
+        TopBannerComponentView(
+            actionCourse: {
+                rootViewModel.currentTab = .Course
+            },
+            actionExercise: {
+                if rootViewModel.dataUser?.statusAccount == "verified" {
+                    homeViewModel.exercisePageIsActive = true
+                } else {
+                    homeViewModel.isOpenBecomeMemberRecomendation = true
+                }
+            },
+            actionExam: {
+                rootViewModel.currentTab = .Exam
+            },
+            isLoading:
+                (
+                    rootViewModel.dataStatusUser == .InProgressToNetwork ||
+                        rootViewModel.dataStatusRecapCourses == .InProgressToNetwork ||
+                        rootViewModel.dataStatusActivities == .InProgressToNetwork ||
+                        rootViewModel.dataStatusPublications == .InProgressToNetwork
+                )
+        )
         .padding(.horizontal)
         .zIndex(99)
     }

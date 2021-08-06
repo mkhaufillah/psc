@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RegisterRequestModel: Codable, RequestProtocol {
+struct RegisterRequestModel: RequestProtocol {
     var name: String
     var email: String
     var password: String
@@ -19,20 +19,6 @@ struct RegisterRequestModel: Codable, RequestProtocol {
     var referenceId: String
     var detailReferenceEtc: String
     var education: String
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-        case email
-        case password
-        case cPassword
-        case gender
-        case picture
-        case address
-        case birthdate = "birthday"
-        case referenceId
-        case detailReferenceEtc
-        case education
-    }
 }
 
 struct RegisterResponseModel: Codable, ResponseProtocol {

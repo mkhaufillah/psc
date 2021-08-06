@@ -1,5 +1,5 @@
 //
-//  publicationString.swift
+//  PublicationString.swift
 //  PiranhaSmartCenter
 //
 //  Created by mohammad.khaufillah on 24/07/21.

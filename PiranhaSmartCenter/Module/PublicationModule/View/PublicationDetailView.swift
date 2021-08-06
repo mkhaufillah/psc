@@ -16,24 +16,36 @@ struct PublicationDetailView: View {
     @Binding var image: UIImage?
     
     var desc = Text("")
+    var imageData: NSData? = nil
+    
+    @GestureState private var dragOffset = CGSize.zero
     
     init(publication: PublicationModel, image: Binding<UIImage?>) {
         self.publication = publication
         self._image = image
         
-        let descArray = (JSONHelper<PublicationModel>().stringToDictionary(text: publication.desc ?? "") ?? [String:Any]())["ops"] as! Array<Any>
+        let descArray = (JSONHelper<PublicationModel>().stringToDictionary(text: publication.desc ?? "") ?? [String:Any]())["ops"] as? Array<Any>
         
-        for descItem in descArray {
-            let descItemConv = descItem as! [String: Any]
-            let insert = descItemConv["insert"] as! String?
-            let attributes = descItemConv["attributes"] as! [String: Any]?
-            let italic = attributes?["italic"] as! Bool? ?? false
-            let bold = attributes?["bold"] as! Bool? ?? false
+        for descItem in descArray ?? [] {
+            let descItemConv = descItem as? [String: Any]
+            //Use image name from bundle to create NSData
+            var insert = descItemConv?["insert"] as? String?
+            if insert == nil {
+                insert = ""
+                let imgStr = ((descItemConv?["insert"] as? [String:Any])?["image"] as? String? ?? "") ?? ""
+                //Use image's path to create NSData
+                let url = URL(string: imgStr)!
+                //Now use image to create into NSData format
+                imageData = NSData.init(contentsOf: url)
+            }
+            let attributes = descItemConv?["attributes"] as? [String: Any]?
+            let italic = attributes??["italic"] as? Bool? ?? false
+            let bold = attributes??["bold"] as? Bool? ?? false
             
             if italic == true {
-                desc = desc + Text(insert ?? "").fontWeight(bold == true ? .bold : .regular).italic()
+                desc = desc + Text((insert ?? "") ?? "").fontWeight(bold == true ? .bold : .regular).italic()
             } else {
-                desc = desc + Text(insert ?? "").fontWeight(bold == true ? .bold : .regular)
+                desc = desc + Text((insert ?? "") ?? "").fontWeight(bold == true ? .bold : .regular)
             }
         }
     }
@@ -85,6 +97,15 @@ struct PublicationDetailView: View {
                             .background(Color("ForegroundLayer2Color").shadow(radius: 5))
                             .cornerRadius(12)
                             .padding()
+                        if imageData != nil {
+                            Image(uiImage: UIImage(data: imageData! as Data) ?? UIImage())
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: bounds.size.width - 32)
+                                .background(Color("ForegroundLayer2Color").shadow(radius: 5))
+                                .cornerRadius(12)
+                                .padding(.horizontal)
+                        }
                         desc
                             .padding(.horizontal)
                     }
@@ -98,5 +119,10 @@ struct PublicationDetailView: View {
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .navigationViewStyle(StackNavigationViewStyle())
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 && value.translation.width > 100) {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }))
     }
 }

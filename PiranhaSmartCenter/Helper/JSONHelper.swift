@@ -8,9 +8,17 @@
 import Foundation
 
 struct JSONHelper<T:Codable> {
+    let isConvertToSnackCase: Bool
+    
+    init(isConvertToSnackCase: Bool = true) {
+        self.isConvertToSnackCase = isConvertToSnackCase
+    }
+    
     func encode(object: T) -> (Data?, AppError?) {
         let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
+        if isConvertToSnackCase {
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+        }
         guard let data = try? encoder.encode(object) else {
             if GlobalStaticData.isDebug {
                 print("[DebugError] " + ErrorString.encodeFailed)
@@ -22,7 +30,9 @@ struct JSONHelper<T:Codable> {
     
     func decode(data: Data) -> (T?, AppError?) {
         let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        if isConvertToSnackCase {
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+        }
         guard let object = try? decoder.decode(T.self, from: data) else {
             if GlobalStaticData.isDebug {
                 print("[DebugError] " + ErrorString.decodeFailed)

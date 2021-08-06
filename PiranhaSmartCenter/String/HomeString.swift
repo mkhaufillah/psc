@@ -32,4 +32,8 @@ struct HomeString : StringProtocol {
     static let loadPublicationTime = "..."
     static let loadActivityName = "Memuat aktivitas..."
     static let loadActivityTime = "..."
+    // account alert
+    static let premiumMemberAlertTitle = "Anda tidak memiliki akses ke latihan soal"
+    static let premiumMemberAlertSubitle = "Untuk dapat mengakses latihan soal, anda harus menjadi member aktif"
+    static let premiumMemberAlertDesc = "Menu menjadi member bisa diakses di \"Profile / Menjadi Member\""
 }

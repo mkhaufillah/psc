@@ -9,9 +9,11 @@ import Foundation
 
 struct RequestGetProvider<ResponseModel: Codable> {
     let url: String
+    let isConvertToSnackCase: Bool
     
-    init(url: String) {
+    init(url: String, isConvertToSnackCase: Bool = true) {
         self.url = url
+        self.isConvertToSnackCase = isConvertToSnackCase
     }
     
     func doAction(response: @escaping (ResponseModel?, AppError?) -> Void) {

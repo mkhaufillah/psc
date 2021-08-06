@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct SignInView: View {
-    @ObservedObject var signInViewModel = SignInViewModel()
+    @StateObject var signInViewModel = SignInViewModel()
     
     @EnvironmentObject var rootViewModel: RootViewModel
     
+    let globalNote: String
+    
     init(globalNote: String = "") {
-        signInViewModel.globalNote = globalNote
+        self.globalNote = globalNote
     }
     
     var body: some View {
@@ -69,6 +71,9 @@ struct SignInView: View {
                     .font(.system(size: 14))
                     .padding(.bottom, 16)
             }
+        }
+        .onAppear {
+            signInViewModel.globalNote = globalNote
         }
     }
 }

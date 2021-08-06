@@ -8,7 +8,7 @@
 import Foundation
 
 struct GlobalStaticData {
-    static let isDebug = true
+    static let isDebug = false
     static let baseUrl = "https://piranhasmartcenter.com"
     static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 }

@@ -11,9 +11,11 @@ struct MultipartFormDataRequestHelper {
     private let boundary: String = NSUUID().uuidString
     private var httpBody = NSMutableData()
     let url: URL
+    let token: String?
     
-    init(url: URL) {
+    init(url: URL, token: String? = nil) {
         self.url = url
+        self.token = token
     }
     
     func addTextField(named name: String, value: String) {
@@ -56,6 +58,9 @@ struct MultipartFormDataRequestHelper {
         
         request.httpMethod = "POST"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        if token != nil {
+            request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+        }
         
         httpBody.append("--\(boundary)--")
         request.httpBody = httpBody as Data

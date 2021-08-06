@@ -13,11 +13,13 @@ struct TopBannerComponentView: View {
     let actionCourse: () -> Void
     let actionExercise: () -> Void
     let actionExam: () -> Void
+    let isLoading: Bool
     
-    init(actionCourse: @escaping () -> Void, actionExercise: @escaping () -> Void, actionExam: @escaping () -> Void) {
+    init(actionCourse: @escaping () -> Void, actionExercise: @escaping () -> Void, actionExam: @escaping () -> Void, isLoading: Bool) {
         self.actionCourse = actionCourse
         self.actionExercise = actionExercise
         self.actionExam = actionExam
+        self.isLoading = isLoading
     }
     
     var body: some View {
@@ -38,35 +40,38 @@ struct TopBannerComponentView: View {
                     Spacer()
                     ButtonTopBarComponentView(
                         title: HomeString.course,
-                        backgroundColorImg: "CourseColor",
+                        backgroundColorImg: isLoading ? "ForegroundLayer2Color" : "CourseColor",
                         foregroundColorImg: "BackgroundLayer1Color",
                         foregroundColorText: "ForegroundColor",
                         icon: "book",
                         action: {
                             actionCourse()
-                        }
+                        },
+                        isLoading: isLoading
                     )
                     Spacer()
                     ButtonTopBarComponentView(
                         title: HomeString.exercise,
-                        backgroundColorImg: "ExerciseColor",
+                        backgroundColorImg: isLoading ? "ForegroundLayer2Color" : "ExerciseColor",
                         foregroundColorImg: "BackgroundLayer1Color",
                         foregroundColorText: "ForegroundColor",
                         icon: "highlighter",
                         action: {
                             actionExercise()
-                        }
+                        },
+                        isLoading: isLoading
                     )
                     Spacer()
                     ButtonTopBarComponentView(
                         title: HomeString.exam,
-                        backgroundColorImg: "ExamColor",
+                        backgroundColorImg: isLoading ? "ForegroundLayer2Color" : "ExamColor",
                         foregroundColorImg: "BackgroundLayer1Color",
                         foregroundColorText: "ForegroundColor",
                         icon: "doc",
                         action: {
                             actionExam()
-                        }
+                        },
+                        isLoading: isLoading
                     )
                     Spacer()
                 }

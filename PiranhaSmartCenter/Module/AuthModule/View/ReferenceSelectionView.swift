@@ -19,6 +19,7 @@ struct ReferenceSelectionView: View {
             Color("BackgroundColor").ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .center, spacing: 16) {
+                    Spacer()
                     ButtonComponentView.textFieldFullButton(title: HelperString.instagram, action: {
                         registerViewModel.reference = ReferenceHelper.instagram
                         presentationMode.wrappedValue.dismiss()
@@ -39,6 +40,7 @@ struct ReferenceSelectionView: View {
                         registerViewModel.reference = ReferenceHelper.others
                         presentationMode.wrappedValue.dismiss()
                     }, traillingImg: registerViewModel.reference != ReferenceHelper.others ? nil : "checkmark.circle.fill", isCenter: false)
+                    Spacer()
                 }.padding()
             }
         }

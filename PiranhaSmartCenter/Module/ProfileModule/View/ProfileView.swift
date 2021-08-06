@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     private let bounds = UIScreen.main.bounds
     
-    @ObservedObject var profileViewModel = ProfileViewModel()
+    @StateObject var profileViewModel = ProfileViewModel()
     
     @EnvironmentObject var rootViewModel: RootViewModel
     
@@ -52,25 +52,27 @@ struct ProfileView: View {
                             }
                         }
                         .buttonStyle(DefaultButtonStyleHelper())
-                        Button(action: {
-                            rootViewModel.becomeMemberPageIsActive = true
-                        }) {
-                            VStack {
-                                Image(systemName: "person.crop.circle.fill.badge.checkmark")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width:48, height:48)
-                                    .padding(48/2)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 72, style: .continuous)
-                                            .stroke(Color("ForegroundColor"), lineWidth: 3).background(Color("TransparentColor"))
-                                    )
-                                    .foregroundColor(Color("ForegroundColor"))
-                                Text(ProfileString.becameMember)
-                                    .lineLimit(1)
+                        if rootViewModel.dataUser?.statusAccount != "verified" {
+                            Button(action: {
+                                rootViewModel.becomeMemberPageIsActive = true
+                            }) {
+                                VStack {
+                                    Image(systemName: "person.crop.circle.fill.badge.checkmark")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width:48, height:48)
+                                        .padding(48/2)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 72, style: .continuous)
+                                                .stroke(Color("ForegroundColor"), lineWidth: 3).background(Color("TransparentColor"))
+                                        )
+                                        .foregroundColor(Color("ForegroundColor"))
+                                    Text(ProfileString.becameMember)
+                                        .lineLimit(1)
+                                }
                             }
+                            .buttonStyle(DefaultButtonStyleHelper())
                         }
-                        .buttonStyle(DefaultButtonStyleHelper())
                         Button(action: {
                             profileViewModel.alertLogoutIsActive = true
                         }) {

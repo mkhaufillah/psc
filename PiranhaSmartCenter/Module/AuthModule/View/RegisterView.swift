@@ -10,7 +10,9 @@ import SwiftUI
 struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @ObservedObject var registerViewModel = RegisterViewModel()
+    @StateObject var registerViewModel = RegisterViewModel()
+    
+    @GestureState private var dragOffset = CGSize.zero
     
     var body: some View {
         RegisterBackgroundComponentView() {
@@ -75,7 +77,6 @@ struct RegisterView: View {
                 HStack(alignment: .center, spacing: 16) {
                     // Back to login page
                     ButtonComponentView.secondaryFullButton(title: RegisterString.back, action: {
-                        hideKeyboard()
                         presentationMode.wrappedValue.dismiss()
                     }, leadingImg: "chevron.backward")
                     // Do Register
@@ -89,6 +90,14 @@ struct RegisterView: View {
                 .padding(.vertical, 16)
             }
         }
+        .onDisappear {
+            hideKeyboard()
+        }
+        .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            if(value.startLocation.x < 20 && value.translation.width > 100) {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }))
     }
 }
 

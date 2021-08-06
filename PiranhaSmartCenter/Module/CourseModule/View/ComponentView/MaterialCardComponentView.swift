@@ -17,11 +17,18 @@ struct MaterialCardComponentView: View {
     @ObservedObject var imageLoaderProvider: ImageLoaderProvider
     @State var image:UIImage? = nil
     
-    init(url: String? = nil, name: String? = nil, chapterCount: String? = nil, material: MaterialModel? = nil) {
+    @EnvironmentObject var rootViewModel: RootViewModel
+    @EnvironmentObject var exerciseViewModel: ExerciseViewModel
+    
+    let isExercise: Bool
+    
+    init(url: String? = nil, name: String? = nil, chapterCount: String? = nil, material: MaterialModel? = nil, isExercise: Bool = false) {
         imageLoaderProvider = ImageLoaderProvider(urlString: url ?? "")
         self.name = name
         self.chapterCount = chapterCount
         self.material = material
+        
+        self.isExercise = isExercise
     }
     
     var body: some View {
@@ -31,12 +38,49 @@ struct MaterialCardComponentView: View {
             }
             .buttonStyle(DefaultButtonStyleHelper())
         } else {
-            NavigationLink(
-                destination: MaterialDetailView(material: material!, image: $image)
-            ) {
-                content
+            if isExercise {
+                ZStack {
+                    // for bugs reason
+                    NavigationLink(destination: EmptyView()) {
+                        EmptyView()
+                    }
+                    // ----
+                    NavigationLink(
+                        destination: OnBoardExerciseView(material: material!)
+                            .environmentObject(exerciseViewModel),
+                        tag: material!.id,
+                        selection: $exerciseViewModel.onboardingPageIsActive
+                    ) {
+                        content
+                    }
+                    .buttonStyle(DefaultButtonStyleHelper())
+                    // for bugs reason
+                    NavigationLink(destination: EmptyView()) {
+                        EmptyView()
+                    }
+                    // ----
+                }
+            } else {
+                ZStack {
+                    // for bugs reason
+                    NavigationLink(destination: EmptyView()) {
+                        EmptyView()
+                    }
+                    // ----
+                    NavigationLink(
+                        destination: MaterialDetailView(material: material!, image: $image)
+                            .environmentObject(rootViewModel)
+                    ) {
+                        content
+                    }
+                    .buttonStyle(DefaultButtonStyleHelper())
+                    // for bugs reason
+                    NavigationLink(destination: EmptyView()) {
+                        EmptyView()
+                    }
+                    // ----
+                }
             }
-            .buttonStyle(DefaultButtonStyleHelper())
         }
     }
     
@@ -66,22 +110,24 @@ struct MaterialCardComponentView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(name ?? CourseString.loadCourseName)
                         .fontWeight(.bold)
-                        .lineLimit(2)
+                        .lineLimit(isExercise ? 3 : 2)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.top, 8)
                     Spacer()
-                    HStack {
-                        Image(systemName: "folder")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 12, height: 12)
-                            .lineLimit(1)
-                        Text((chapterCount ?? CourseString.loadChapters) + " " + CourseString.chapters)
-                            .font(.system(size: 12))
-                            .lineLimit(1)
-                        Spacer()
+                    if !isExercise {
+                        HStack {
+                            Image(systemName: "folder")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 12, height: 12)
+                                .lineLimit(1)
+                            Text((chapterCount ?? CourseString.loadChapters) + " " + CourseString.chapters)
+                                .font(.system(size: 12))
+                                .lineLimit(1)
+                            Spacer()
+                        }
+                        .padding(.bottom, 8)
                     }
-                    .padding(.bottom, 8)
                 }
                 Spacer()
             }
@@ -91,4 +137,3 @@ struct MaterialCardComponentView: View {
         .cornerRadius(18)
     }
 }
-

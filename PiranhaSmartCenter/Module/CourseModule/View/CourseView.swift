@@ -118,7 +118,7 @@ struct CourseView: View {
                             Divider()
                                 .padding(.top)
                                 .padding(.bottom, 8)
-                            Text("Data tidak ditemukan")
+                            Text(ErrorString.notFoundData)
                             Divider()
                                 .padding(.top, 8)
                                 .padding(.bottom)
@@ -133,6 +133,7 @@ struct CourseView: View {
                                 chapterCount: "\(material.chapterShorts.count)",
                                 material: material
                             )
+                            .environmentObject(rootViewModel)
                         }
                         if !rootViewModel.isFinalPage[iCourse] && rootViewModel.dataMaterials[iCourse].count > 0 {
                             Divider()

@@ -10,16 +10,16 @@ import SwiftUI
 struct ErrorComponentView {
     static func simple(reload: @escaping () -> Void) -> some View {
         HStack {
-            Text("Gagal memuat data,")
-                .foregroundColor(Color("ForegroundLayer2Color"))
+            Text(ErrorString.failedToLoadData + ",")
             Button(action: {
                 reload()
             }) {
                 HStack {
-                    Text("Ulangi")
+                    Text(ErrorString.retry)
                     Image(systemName: "arrow.counterclockwise")
                 }
             }
         }
+        .frame(minWidth: 0, maxWidth: .infinity)
     }
 }

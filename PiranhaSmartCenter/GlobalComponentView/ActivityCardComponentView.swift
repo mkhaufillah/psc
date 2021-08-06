@@ -8,18 +8,23 @@
 import SwiftUI
 
 struct ActivityCardComponentView: View {
+    private let bounds = UIScreen.main.bounds
+    
     let name: String?
     let time: String?
     let activity: ActivityModel?
     
+    let isForGrid: Bool
+    
     @ObservedObject var imageLoaderProvider: ImageLoaderProvider
     @State var image:UIImage? = nil
     
-    init(url: String? = nil, name: String? = nil, time: String? = nil, activity: ActivityModel? = nil) {
+    init(url: String? = nil, name: String? = nil, time: String? = nil, activity: ActivityModel? = nil, isForGrid: Bool = false) {
         imageLoaderProvider = ImageLoaderProvider(urlString: url ?? "")
         self.name = name
         self.time = time
         self.activity = activity
+        self.isForGrid = isForGrid
     }
     
     var body: some View {
@@ -29,10 +34,22 @@ struct ActivityCardComponentView: View {
             }
             .buttonStyle(DefaultButtonStyleHelper())
         } else {
-            NavigationLink(destination: ActivityDetailView(activity: activity!, image: $image)) {
-                content
+            ZStack {
+                // for bugs reason
+                NavigationLink(destination: EmptyView()) {
+                    EmptyView()
+                }
+                // ----
+                NavigationLink(destination: ActivityDetailView(activity: activity!, image: $image)) {
+                    content
+                }
+                .buttonStyle(DefaultButtonStyleHelper())
+                // for bugs reason
+                NavigationLink(destination: EmptyView()) {
+                    EmptyView()
+                }
+                // ----
             }
-            .buttonStyle(DefaultButtonStyleHelper())
         }
     }
     
@@ -40,12 +57,12 @@ struct ActivityCardComponentView: View {
         Group {
             ZStack {
                 Color("ForegroundLayer2Color")
-                    .frame(width: 256, height: 132)
+                    .frame(width: isForGrid ? bounds.size.width - 16 * 2 : 256, height: 132)
                     .cornerRadius(1)
                 Image(uiImage: image ?? UIImage())
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 256, height: 132)
+                    .frame(width: isForGrid ? bounds.size.width - 16 * 2 : 256, height: 132)
                     .background(Color("ForegroundLayer2Color"))
                     .cornerRadius(1)
                     .onReceive(imageLoaderProvider.didChange) { data in
@@ -60,7 +77,7 @@ struct ActivityCardComponentView: View {
                     startPoint: .top,
                     endPoint: .bottom
                 )
-                .frame(width: 256, height: 132)
+                .frame(width: isForGrid ? bounds.size.width - 16 * 2 : 256, height: 132)
                 .cornerRadius(1)
                 VStack(alignment: .leading, spacing: 8) {
                     Spacer()
@@ -80,8 +97,9 @@ struct ActivityCardComponentView: View {
                 }
                 .padding()
             }
+            .frame(width: isForGrid ? bounds.size.width - 16 * 2 : 256)
         }
-        .frame(width: 256)
+        .frame(width: isForGrid ? bounds.size.width - 16 * 2 : 256)
         .background(Color("BackgroundLayer1Color"))
         .cornerRadius(18)
     }

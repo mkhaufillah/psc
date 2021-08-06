@@ -19,6 +19,7 @@ struct GenderSelectionView: View {
             Color("BackgroundColor").ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .center, spacing: 16) {
+                    Spacer()
                     ButtonComponentView.textFieldFullButton(title: HelperString.male, action: {
                         registerViewModel.gender = GenderHelper.male
                         presentationMode.wrappedValue.dismiss()
@@ -31,6 +32,7 @@ struct GenderSelectionView: View {
                         registerViewModel.gender = GenderHelper.others
                         presentationMode.wrappedValue.dismiss()
                     }, traillingImg: registerViewModel.gender != GenderHelper.others ? nil : "checkmark.circle.fill", isCenter: false)
+                    Spacer()
                 }.padding()
             }
         }
