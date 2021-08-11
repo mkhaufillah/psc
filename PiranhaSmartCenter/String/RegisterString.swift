@@ -11,13 +11,16 @@ struct RegisterString: StringProtocol {
     static let back = "Kembali"
     static let name = "Nama"
     static let email = "Email"
-    static let gender = "Jenis Kelamin"
-    static let phone = "No. Telepon"
-    static let birthdate = "Tanggal Lahir"
-    static let address = "Alamat"
     static let reference = "Mendapat info PSC Brevet dari?"
     static let referenceDetail = "Detail Referensi"
-    static let education = "Pendidikan Terakhir"
+    
+    /// App store policy
+    static let gender = "Jenis Kelamin (Opsional)"
+    static let phone = "No. Telepon (Opsional)"
+    static let birthdate = "Tanggal Lahir (Opsional)"
+    static let address = "Alamat (Opsional)"
+    static let education = "Pendidikan Terakhir (Opsional)"
+    
     static let register = "Daftar"
     static let newPassword = "Kata Sandi Baru"
     static let repeatNewPassword = "Tulis Ulang Kata Sandi Baru"

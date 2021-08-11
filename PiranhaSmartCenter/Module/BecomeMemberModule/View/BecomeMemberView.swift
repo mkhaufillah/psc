@@ -12,6 +12,8 @@ struct BecomeMemberView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @EnvironmentObject var rootViewModel: RootViewModel
+    
     @StateObject var becomeMemberViewModel = BecomeMemberViewModel()
     
     private let bounds = UIScreen.main.bounds
@@ -55,6 +57,7 @@ struct BecomeMemberView: View {
                     }
                     .buttonStyle(DefaultButtonStyleHelper())
                     .padding()
+                    .disabled(becomeMemberViewModel.isPrecessingPayment)
                     ScrollView {
                         VStack(alignment: .center, spacing: 16) {
                             Spacer()
@@ -76,9 +79,18 @@ struct BecomeMemberView: View {
                                 .frame(width: bounds.size.width / 1.3 - 32)
                                 .padding(.horizontal)
                             Spacer()
-                            ButtonComponentView.primaryButton(title: BecomeMemberString.subscribe, action: {
-                                becomeMemberViewModel.infoPaymentPageIsActive = true
-                            })
+                            ButtonComponentView.primaryButton(
+                                title: BecomeMemberString.subscribe, action: {
+                                    /// App store policy
+                                    // becomeMemberViewModel.infoPaymentPageIsActive = true
+                                    becomeMemberViewModel.inAppPurchase() {
+                                        rootViewModel.initDataUserFromNetwork()
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                },
+                                isLoading: (!becomeMemberViewModel.isCompletedFetchProduct || becomeMemberViewModel.isPrecessingPayment) && !becomeMemberViewModel.isErrorFetch,
+                                isDisabled: !becomeMemberViewModel.isCompletedFetchProduct || becomeMemberViewModel.isPrecessingPayment || becomeMemberViewModel.isErrorFetch
+                            )
                             Spacer()
                             
                         }
@@ -97,6 +109,9 @@ struct BecomeMemberView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
             if(value.startLocation.x < 20 && value.translation.width > 100) {
+                if becomeMemberViewModel.isPrecessingPayment {
+                    return
+                }
                 presentationMode.wrappedValue.dismiss()
             }
         }))

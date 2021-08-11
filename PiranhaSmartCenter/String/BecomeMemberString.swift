@@ -22,4 +22,8 @@ struct BecomeMemberString : StringProtocol {
     static let requiredBank = "Anda harus memilih bank sebelum melanjutkan konfirmasi"
     static let requiredEvidence = "Anda harus mengunggah bukti sebelum melanjutkan konfirmasi"
     static let errorLoadBankList = "Gagal memuat daftar pembayaran"
+    /// App store policy
+    // In app purchase
+    static let successPurchasing = "Berhasil"
+    static let successPurchasingDesc = "Selamat, akun anda sudah menjadi premium"
 }

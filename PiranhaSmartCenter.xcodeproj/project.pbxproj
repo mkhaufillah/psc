@@ -146,6 +146,9 @@
 		55E389A726AF81950044DAD5 /* DeleteCommentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E389A626AF81950044DAD5 /* DeleteCommentProvider.swift */; };
 		55E5E03A26A7D30F0092DBE2 /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E5E03926A7D30F0092DBE2 /* ActivityDetailView.swift */; };
 		55E5E03E26A7D4310092DBE2 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E5E03D26A7D4310092DBE2 /* MaterialView.swift */; };
+		55E729DA26C34385001E33B1 /* InAppPurchaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E729D926C34385001E33B1 /* InAppPurchaseModel.swift */; };
+		55E729DC26C34459001E33B1 /* InAppPurchaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E729DB26C34459001E33B1 /* InAppPurchaseProvider.swift */; };
+		55E729DE26C35267001E33B1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E729DD26C35267001E33B1 /* StoreKit.framework */; };
 		55F8AFA826ABA45A00FA4B99 /* RecapCourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F8AFA726ABA45A00FA4B99 /* RecapCourseModel.swift */; };
 		55F8AFAA26ABA57400FA4B99 /* RecapCourseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F8AFA926ABA57400FA4B99 /* RecapCourseProvider.swift */; };
 		55F8AFAC26ABBEDA00FA4B99 /* PublicationString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F8AFAB26ABBEDA00FA4B99 /* PublicationString.swift */; };
@@ -337,6 +340,10 @@
 		55E389A626AF81950044DAD5 /* DeleteCommentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCommentProvider.swift; sourceTree = "<group>"; };
 		55E5E03926A7D30F0092DBE2 /* ActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailView.swift; sourceTree = "<group>"; };
 		55E5E03D26A7D4310092DBE2 /* MaterialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
+		55E729D626C3321E001E33B1 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		55E729D926C34385001E33B1 /* InAppPurchaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseModel.swift; sourceTree = "<group>"; };
+		55E729DB26C34459001E33B1 /* InAppPurchaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseProvider.swift; sourceTree = "<group>"; };
+		55E729DD26C35267001E33B1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		55F8AFA726ABA45A00FA4B99 /* RecapCourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapCourseModel.swift; sourceTree = "<group>"; };
 		55F8AFA926ABA57400FA4B99 /* RecapCourseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapCourseProvider.swift; sourceTree = "<group>"; };
 		55F8AFAB26ABBEDA00FA4B99 /* PublicationString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationString.swift; sourceTree = "<group>"; };
@@ -377,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				881EA5BFE1EE08227AB4FE17 /* Pods_PiranhaSmartCenter.framework in Frameworks */,
+				55E729DE26C35267001E33B1 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +461,7 @@
 				550DA3072693E6E400C50597 /* Assets.xcassets */,
 				55FEDF152697D255007D7C1A /* GoogleService-Info.plist */,
 				550DA30C2693E6E400C50597 /* Info.plist */,
+				55E729D626C3321E001E33B1 /* Configuration.storekit */,
 				550DA3092693E6E400C50597 /* Preview Content */,
 			);
 			path = PiranhaSmartCenter;
@@ -862,6 +871,7 @@
 			children = (
 				55E1555226B50F79003C783C /* BankModel.swift */,
 				55E1555426B51192003C783C /* SendInvoiceModel.swift */,
+				55E729D926C34385001E33B1 /* InAppPurchaseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -871,6 +881,7 @@
 			children = (
 				55E1555626B512B4003C783C /* SendInvoiceProvider.swift */,
 				55E1555826B512C2003C783C /* BankProvider.swift */,
+				55E729DB26C34459001E33B1 /* InAppPurchaseProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -1143,6 +1154,7 @@
 		70D5794EEE8BC7A232E90D3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55E729DD26C35267001E33B1 /* StoreKit.framework */,
 				752620E538B4CDE97E3E001F /* Pods_PiranhaSmartCenter.framework */,
 				3F27172E241FC084DFF08B94 /* Pods_PiranhaSmartCenter_PiranhaSmartCenterUITests.framework */,
 				99470EF321E1D046C6BB19CD /* Pods_PiranhaSmartCenterTests.framework */,
@@ -1412,6 +1424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55FEDF3E26998701007D7C1A /* StringProtocol.swift in Sources */,
+				55E729DC26C34459001E33B1 /* InAppPurchaseProvider.swift in Sources */,
 				551BE8CB26A4195300D23038 /* PublicationCardComponentView.swift in Sources */,
 				554393DD26A5C92200D95FDA /* PublicationModel.swift in Sources */,
 				55E1C9C226AE80F400F1171D /* PostCommentModel.swift in Sources */,
@@ -1534,6 +1547,7 @@
 				553385D926A3DFE7009B1AEF /* BecomeMemberString.swift in Sources */,
 				55AF5178269E6B2B00CB3313 /* RootViewModel.swift in Sources */,
 				551BE8D526A48FB400D23038 /* ImageAlphabetComponentView.swift in Sources */,
+				55E729DA26C34385001E33B1 /* InAppPurchaseModel.swift in Sources */,
 				55E1557226B5B6BE003C783C /* GetResultExamModel.swift in Sources */,
 				5538E5D026A6FCBD00431360 /* ImageProfileComponentView.swift in Sources */,
 				55E1557626B5BE48003C783C /* ExcerciseQuestionProvider.swift in Sources */,
@@ -1735,7 +1749,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"PiranhaSmartCenter/Preview Content\"";
 				DEVELOPMENT_TEAM = SN388LM7MK;
 				ENABLE_PREVIEWS = YES;
@@ -1759,7 +1773,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"PiranhaSmartCenter/Preview Content\"";
 				DEVELOPMENT_TEAM = SN388LM7MK;
 				ENABLE_PREVIEWS = YES;

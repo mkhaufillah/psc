@@ -81,26 +81,6 @@ class RegisterViewModel: ObservableObject {
             return false
         }
         
-        if gender == "" {
-            note = ErrorString.requiredGender
-            return false
-        }
-        
-        if phone == "" {
-            note = ErrorString.requiredPhone
-            return false
-        }
-        
-        if birthdate > Calendar.current.date(byAdding: .year, value: -10, to: Date()) ?? Date() {
-            note = ErrorString.requiredBirthdate
-            return false
-        }
-        
-        if address == "" {
-            note = ErrorString.requiredAddress
-            return false
-        }
-        
         if reference == "" {
             note = ErrorString.requiredReference
             return false
@@ -111,9 +91,38 @@ class RegisterViewModel: ObservableObject {
             return false
         }
         
+        /// App store policy
+        // if birthdate > Calendar.current.date(byAdding: .year, value: -10, to: Date()) ?? Date() {
+        //     note = ErrorString.requiredBirthdate
+        //     return false
+        // }
+        
+        if gender == "" {
+            /// App store policy
+            // note = ErrorString.requiredGender
+            // return false
+            gender = "-"
+        }
+        
+        if phone == "" {
+            /// App store policy
+            // note = ErrorString.requiredPhone
+            // return false
+            phone = "-"
+        }
+        
+        if address == "" {
+            /// App store policy
+            // note = ErrorString.requiredAddress
+            // return false
+            address = "-"
+        }
+        
         if education == "" {
-            note = ErrorString.requiredEducation
-            return false
+            /// App store policy
+            // note = ErrorString.requiredEducation
+            // return false
+            education = "-"
         }
         
         note = ""

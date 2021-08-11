@@ -1,0 +1,33 @@
+{
+  "identifier" : "8A4B8E99",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "49.99",
+      "familyShareable" : false,
+      "internalID" : "90E1F187",
+      "localizations" : [
+        {
+          "description" : "Dapatkan fitur keren dari PSC e-Brevet",
+          "displayName" : "Member Premium",
+          "locale" : "id"
+        }
+      ],
+      "productID" : "premium_member_psc_001",
+      "referenceName" : "Premium Member",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}

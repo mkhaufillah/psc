@@ -19,7 +19,8 @@ struct RootView: View {
                     NavigationLink(
                         destination: BecomeMemberView(
                             isRootActive: $rootViewModel.becomeMemberPageIsActive
-                        ),
+                        )
+                        .environmentObject(rootViewModel),
                         isActive: $rootViewModel.becomeMemberPageIsActive
                     ) {
                         EmptyView()

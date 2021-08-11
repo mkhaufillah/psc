@@ -69,4 +69,7 @@ struct ApiUrlStatic {
     
     // Finish Exercise & Exam
     static let finishExerciseExam = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + "/user/finish"
+    
+    // In app purchase
+    static let inAppPurchase = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + "/user/in-app-purchase"
 }

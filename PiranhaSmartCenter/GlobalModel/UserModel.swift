@@ -25,6 +25,7 @@ class UserModel: Object, Codable, Identifiable {
     @objc dynamic var referenceId: String?
     @objc dynamic var education: String?
     @objc dynamic var detailReferenceEtc: String?
+    @objc dynamic var pcode: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -44,6 +45,7 @@ class UserModel: Object, Codable, Identifiable {
         case referenceId
         case education
         case detailReferenceEtc
+        case pcode
     }
     
     override static func primaryKey() -> String? {

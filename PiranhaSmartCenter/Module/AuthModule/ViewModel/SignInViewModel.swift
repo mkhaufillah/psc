@@ -52,26 +52,19 @@ class SignInViewModel: ObservableObject {
                     
                     do {
                         // Save into local data with realm
-                        let realm = try Realm()
-                        try realm.write {
-                            // Delete data first
-                            realm.deleteAll()
-                            if result != nil {
-                                if result!.data != nil {
-                                    realm.add(result!.data!)
-                                }
-                            }
-                        }
-                        
-                        if GlobalStaticData.isDebug {
-                            print("[Realm data result] ===========")
-                            print(realm.objects(SignInDataModel.self))
-                            print("===============================")
-                        }
-                        
+                        try self.saveData()
                         postLoginAction()
                     } catch {
-                        self.note = ErrorString.failAddLocalUserData + "\n" + ErrorString.failDeleteLocalUserData
+                        do {
+                            try FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+                            
+                            try self.saveData()
+                            postLoginAction()
+                        } catch {
+                            self.note = ErrorString.failAddLocalUserData + "\n\n" + ErrorString.failDeleteLocalUserData
+                        }
+                        
+                        self.note = ErrorString.failAddLocalUserData + "\n\n" + ErrorString.failDeleteLocalUserData
                     }
                 }
                 if error != nil {
@@ -79,6 +72,26 @@ class SignInViewModel: ObservableObject {
                 }
                 self.isLoading = false
             }
+        }
+    }
+    
+    func saveData() throws {
+        // Save into local data with realm
+        let realm = try Realm()
+        try realm.write {
+            // Delete data first
+            realm.deleteAll()
+            if result != nil {
+                if result!.data != nil {
+                    realm.add(result!.data!)
+                }
+            }
+        }
+        
+        if GlobalStaticData.isDebug {
+            print("[Realm data result] ===========")
+            print(realm.objects(SignInDataModel.self))
+            print("===============================")
         }
     }
 }

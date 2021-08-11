@@ -21,19 +21,22 @@ struct ErrorString : StringProtocol {
     static let requiredEmail = "\"Email\" belum terisi"
     static let requiredPassword = "\"Kata Sandi\" belum terisi"
     static let invalidEmailFormat = "Format email tidak tepat"
-    static let failDeleteLocalUserData = "Gagal menghapus data pengguna"
-    static let failAddLocalUserData = "Gagal menambah data pengguna"
+    static let failDeleteLocalUserData = "Terdapat kesalahan sistem (Gagal menghapus lokal data)"
+    static let failAddLocalUserData = "Terdapat kesalahan sistem (Gagal menambah lokal data)"
     // Register
     static let requiredName = "\"Nama\" belum terisi"
-    static let requiredGender = "\"Jenis Kelamin\" belum terisi"
-    static let requiredPhone = "\"No. Telepon\" belum terisi"
-    static let requiredBirthdate = "\"Tanggal Lahir\" tidak masuk akal"
-    static let requiredAddress = "\"Alamat\" belum terisi"
     static let requiredReference = "\"Referensi\" belum terisi"
     static let requiredDetailReference = "\"Detail Referensi\" belum terisi"
-    static let requiredEducation = "\"Pendidikan\" belum terisi"
     static let requiredPicture = "\"Foto\" masih kosong"
     static let passwordUnmatch = "\"Kata Sandi\" tidak sama"
+    
+    /// App store policy
+    // static let requiredGender = "\"Jenis Kelamin\" belum terisi"
+    // static let requiredPhone = "\"No. Telepon\" belum terisi"
+    // static let requiredBirthdate = "\"Tanggal Lahir\" tidak masuk akal"
+    // static let requiredAddress = "\"Alamat\" belum terisi"
+    // static let requiredEducation = "\"Pendidikan\" belum terisi"
+    
     // Whatsapp
     static let whatsappCannotOpened = "\"Whatsapp\" tidak bisa dibuka"
     // Video
@@ -42,4 +45,8 @@ struct ErrorString : StringProtocol {
     static let notFoundData = "\"Data\" tidak ditemukan"
     static let failedToLoadData = "\"Data\" gagal dimuat"
     static let retry = "ulangi"
+    /// App store policy
+    // In app purchase
+    static let cannotLoadProducts = "Tidak bisa memuat produk pembelian"
+    static let invalidProductsFound = "Produk pembelian tidak valid"
 }
