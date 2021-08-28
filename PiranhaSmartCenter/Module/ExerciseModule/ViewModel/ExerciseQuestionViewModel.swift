@@ -34,7 +34,7 @@ class ExerciseQuestionViewModel: ObservableObject {
             DispatchQueue.main.async {
                 if error != nil {
                     if self.counterErr <= 3 {
-                        if error?.desc == ErrorString.decodeFailed {
+                        if (error?.desc ?? "").contains(ErrorString.decodeFailedTag) {
                             self.initDataQuestion(idMaterial: idMaterial) {
                                 errorCallback()
                             }
@@ -43,7 +43,7 @@ class ExerciseQuestionViewModel: ObservableObject {
                         }
                     }
                     
-                    if error?.desc == ErrorString.decodeFailed {
+                    if (error?.desc ?? "").contains(ErrorString.decodeFailedTag) {
                         errorCallback()
                         
                         NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle, subtitle: ExerciseString.exerciseNotReady)

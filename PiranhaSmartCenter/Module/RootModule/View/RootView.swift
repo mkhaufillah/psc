@@ -11,7 +11,33 @@ struct RootView: View {
     @StateObject var rootViewModel = RootViewModel()
     
     var body: some View {
-        if rootViewModel.dataUser == nil {
+        if (rootViewModel.isFirstTime && rootViewModel.dataUser == nil) {
+            VStack(spacing: 0) {
+                PagingComponentView(index: $rootViewModel.indexOnboard.animation(), maxIndex: 3) {
+                    OnBoardComponentView(image: "OnBoard1", title: RootString.title1, desc: RootString.desc1) {
+                        withAnimation(.easeOut) {
+                            rootViewModel.indexOnboard = 1
+                        }
+                    }
+                    OnBoardComponentView(image: "OnBoard2", title: RootString.title2, desc: RootString.desc2) {
+                        withAnimation(.easeOut) {
+                            rootViewModel.indexOnboard = 2
+                        }
+                    }
+                    OnBoardComponentView(image: "OnBoard3", title: RootString.title3, desc: RootString.desc3) {
+                        withAnimation(.easeOut) {
+                            rootViewModel.indexOnboard = 3
+                        }
+                    }
+                    OnBoardComponentView(image: "OnBoard4", title: RootString.title4, desc: RootString.desc4, isLast: true) {
+                        rootViewModel.finishOnBoard()
+                    }
+                }
+            }
+            .padding()
+            .background(Color("BackgroundColor"))
+            .ignoresSafeArea()
+        } else if (!rootViewModel.isFirstTime && rootViewModel.dataUser == nil) {
             SignInView().environmentObject(rootViewModel)
         } else {
             NavigationView {
@@ -54,6 +80,9 @@ struct RootView: View {
                                     }
                                     if rootViewModel.dataStatusPublications != .InNetwork && rootViewModel.dataStatusPublications != .InProgressToNetwork {
                                         rootViewModel.initDataPublicationsFromNetwork()
+                                    }
+                                    if rootViewModel.dataStatusAds != .InNetwork && rootViewModel.dataStatusAds != .InProgressToNetwork {
+                                        rootViewModel.initDataAdsFromNetwork()
                                     }
                                 }
                             case .Course:

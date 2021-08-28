@@ -19,27 +19,31 @@ struct JSONHelper<T:Codable> {
         if isConvertToSnackCase {
             encoder.keyEncodingStrategy = .convertToSnakeCase
         }
-        guard let data = try? encoder.encode(object) else {
+        do {
+            let data = try encoder.encode(object)
+            return (data, nil)
+        } catch let jsonError as NSError {
             if GlobalStaticData.isDebug {
-                print("[DebugError] " + ErrorString.encodeFailed)
+                print("[DebugError][encode] " + jsonError.localizedDescription)
             }
-            return (nil, AppError(desc: ErrorString.encodeFailed))
+            return (nil, AppError(desc: "[ " + ErrorString.encodeFailedTag + " ] " + jsonError.localizedDescription))
         }
-        return (data, nil)
     }
     
     func decode(data: Data) -> (T?, AppError?) {
-        let decoder = JSONDecoder()
-        if isConvertToSnackCase {
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-        }
-        guard let object = try? decoder.decode(T.self, from: data) else {
-            if GlobalStaticData.isDebug {
-                print("[DebugError] " + ErrorString.decodeFailed)
+        do {
+            let decoder = JSONDecoder()
+            if isConvertToSnackCase {
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
             }
-            return (nil, AppError(desc: ErrorString.decodeFailed))
+            let object = try decoder.decode(T.self, from: data)
+            return (object, nil)
+        } catch let jsonError as NSError {
+            if GlobalStaticData.isDebug {
+                print("[DebugError][decode] " + jsonError.localizedDescription)
+            }
+            return (nil, AppError(desc: "[ " + ErrorString.decodeFailedTag + " ] " + jsonError.localizedDescription))
         }
-        return (object, nil)
     }
     
     func toDictionary(data: Data) -> ([String : Any]?, AppError?) {

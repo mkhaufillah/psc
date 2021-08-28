@@ -11,11 +11,12 @@ struct ErrorString : StringProtocol {
     // Network
     static let noDataConnection = "Tidak ada koneksi internet, silahkan hidupkan wifi atau data selular"
     static let urlInvalid = "URL bermasalah"
-    static let encodeFailed = "Gagal melakukan encode data"
-    static let decodeFailed = "Gagal melakukan decode data"
+    static let encodeFailedTag = "Gagal encode"
+    static let decodeFailedTag = "Gagal decode"
     static let didNotReceiveData = "Gagal menerima data"
     static let HTTPError = "Gagal melakukan request ke server"
     static let JSONError = "Gagal melakukan konversi ke JSON"
+    static let InvalidToken = "Sesi anda telah berakhir"
     // SignIn
     static let emailPasswordUnmatch = "\"Email\" atau \"Kata Sandi\" anda salah"
     static let requiredEmail = "\"Email\" belum terisi"

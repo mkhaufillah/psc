@@ -21,7 +21,7 @@ class HistoryExamViewModel: ObservableObject {
         getResultExamProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    if (error?.desc ?? "") != ErrorString.decodeFailed {
+                    if !((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                         NotificationComponentView.showErrorNotification(title: ErrorString.title, subtitle: error?.desc ?? "")
                     } else {
                         NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle, subtitle: ErrorString.notFoundData)

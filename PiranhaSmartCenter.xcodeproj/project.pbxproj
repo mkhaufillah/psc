@@ -78,6 +78,12 @@
 		555AC01A26B243560078D1AE /* ChildrenCommentComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555AC01926B243560078D1AE /* ChildrenCommentComponentView.swift */; };
 		55621A8526AD750C002E6B54 /* VideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55621A8426AD750C002E6B54 /* VideoViewModel.swift */; };
 		55621A8726AD75F9002E6B54 /* VideoString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55621A8626AD75F9002E6B54 /* VideoString.swift */; };
+		5581133C26D9CEA000FA0FB9 /* PagingComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581133B26D9CEA000FA0FB9 /* PagingComponentView.swift */; };
+		5581133E26D9D7F900FA0FB9 /* OnBoardComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581133D26D9D7F900FA0FB9 /* OnBoardComponentView.swift */; };
+		5581134026D9EC4000FA0FB9 /* AdsCardComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581133F26D9EC4000FA0FB9 /* AdsCardComponentView.swift */; };
+		5581134226D9EC8F00FA0FB9 /* AdsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581134126D9EC8F00FA0FB9 /* AdsModel.swift */; };
+		5581134426DA0DD600FA0FB9 /* AdsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581134326DA0DD600FA0FB9 /* AdsProvider.swift */; };
+		5589F67C26D0DA13009CAC1D /* OnBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5589F67B26D0DA13009CAC1D /* OnBoardModel.swift */; };
 		55915F4626AE299B009E18B0 /* MaterialString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55915F4526AE299B009E18B0 /* MaterialString.swift */; };
 		55915F4826AE3EE9009E18B0 /* VideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55915F4726AE3EE9009E18B0 /* VideoProvider.swift */; };
 		55915F4A26AE3FBC009E18B0 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55915F4926AE3FBC009E18B0 /* VideoModel.swift */; };
@@ -272,6 +278,12 @@
 		555AC01926B243560078D1AE /* ChildrenCommentComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenCommentComponentView.swift; sourceTree = "<group>"; };
 		55621A8426AD750C002E6B54 /* VideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewModel.swift; sourceTree = "<group>"; };
 		55621A8626AD75F9002E6B54 /* VideoString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoString.swift; sourceTree = "<group>"; };
+		5581133B26D9CEA000FA0FB9 /* PagingComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingComponentView.swift; sourceTree = "<group>"; };
+		5581133D26D9D7F900FA0FB9 /* OnBoardComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardComponentView.swift; sourceTree = "<group>"; };
+		5581133F26D9EC4000FA0FB9 /* AdsCardComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCardComponentView.swift; sourceTree = "<group>"; };
+		5581134126D9EC8F00FA0FB9 /* AdsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsModel.swift; sourceTree = "<group>"; };
+		5581134326DA0DD600FA0FB9 /* AdsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsProvider.swift; sourceTree = "<group>"; };
+		5589F67B26D0DA13009CAC1D /* OnBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardModel.swift; sourceTree = "<group>"; };
 		55915F4526AE299B009E18B0 /* MaterialString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialString.swift; sourceTree = "<group>"; };
 		55915F4726AE3EE9009E18B0 /* VideoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProvider.swift; sourceTree = "<group>"; };
 		55915F4926AE3FBC009E18B0 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
@@ -529,6 +541,7 @@
 				551BE8C626A418E500D23038 /* TopBannerComponentView.swift */,
 				551BE8C826A4190C00D23038 /* CourseCardComponentView.swift */,
 				551BE8D226A4892200D23038 /* ButtonTopBannerComponentView.swift */,
+				5581133F26D9EC4000FA0FB9 /* AdsCardComponentView.swift */,
 			);
 			path = ComponentView;
 			sourceTree = "<group>";
@@ -550,6 +563,7 @@
 			children = (
 				553385BD26A3B2E9009B1AEF /* TabBarIconComponentView.swift */,
 				553385C526A3C560009B1AEF /* PopupMenuComponentView.swift */,
+				5581133D26D9D7F900FA0FB9 /* OnBoardComponentView.swift */,
 			);
 			path = ComponentView;
 			sourceTree = "<group>";
@@ -622,6 +636,7 @@
 				5538E5B126A655E800431360 /* ProfileProvider.swift */,
 				5538E5B526A6567D00431360 /* SearchMaterialProvider.swift */,
 				55F8AFA926ABA57400FA4B99 /* RecapCourseProvider.swift */,
+				5581134326DA0DD600FA0FB9 /* AdsProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -699,10 +714,12 @@
 		554393D926A5C3AF00D95FDA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5589F67B26D0DA13009CAC1D /* OnBoardModel.swift */,
 				554393D726A5C2A900D95FDA /* ProfileModel.swift */,
 				554393DA26A5C90E00D95FDA /* CourseModel.swift */,
 				554393E026A5C96100D95FDA /* SearchMaterialModel.swift */,
 				55F8AFA726ABA45A00FA4B99 /* RecapCourseModel.swift */,
+				5581134126D9EC8F00FA0FB9 /* AdsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1124,6 +1141,7 @@
 				5538E5CA26A6B9B600431360 /* ErrorComponentView.swift */,
 				5523B48926AA5111003A3B1B /* RefreshableComponentView.swift */,
 				55E1554226B4C0A2003C783C /* NotActivatedAccount.swift */,
+				5581133B26D9CEA000FA0FB9 /* PagingComponentView.swift */,
 			);
 			path = GlobalComponentView;
 			sourceTree = "<group>";
@@ -1423,6 +1441,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5581133C26D9CEA000FA0FB9 /* PagingComponentView.swift in Sources */,
 				55FEDF3E26998701007D7C1A /* StringProtocol.swift in Sources */,
 				55E729DC26C34459001E33B1 /* InAppPurchaseProvider.swift in Sources */,
 				551BE8CB26A4195300D23038 /* PublicationCardComponentView.swift in Sources */,
@@ -1430,6 +1449,7 @@
 				55E1C9C226AE80F400F1171D /* PostCommentModel.swift in Sources */,
 				55C62BC726A29C29004E18D5 /* GenderSelectionView.swift in Sources */,
 				55B031E3269FA34300ED3BC3 /* ProfileView.swift in Sources */,
+				5581133E26D9D7F900FA0FB9 /* OnBoardComponentView.swift in Sources */,
 				55E1555E26B56C62003C783C /* ExerciseViewModel.swift in Sources */,
 				55E1556026B5759B003C783C /* OnBoardExerciseView.swift in Sources */,
 				551BE8C526A418C600D23038 /* ShortUserInfoComponentView.swift in Sources */,
@@ -1453,11 +1473,13 @@
 				5538E5B826A6569400431360 /* RequestGetProvider.swift in Sources */,
 				55FEDF53269A628C007D7C1A /* ErrorModel.swift in Sources */,
 				553385C026A3B647009B1AEF /* RootString.swift in Sources */,
+				5581134226D9EC8F00FA0FB9 /* AdsModel.swift in Sources */,
 				55E1554D26B4E39B003C783C /* EvidenceUploadView.swift in Sources */,
 				55D3362B26ACF4A300EB4DB9 /* VideoView.swift in Sources */,
 				55FEDF5A269AAF03007D7C1A /* TickerComponentView.swift in Sources */,
 				55E389A526AF81310044DAD5 /* UpdateCommentProvider.swift in Sources */,
 				55621A8526AD750C002E6B54 /* VideoViewModel.swift in Sources */,
+				5589F67C26D0DA13009CAC1D /* OnBoardModel.swift in Sources */,
 				55E1557C26B5BF07003C783C /* GetAnswerExerciseProvider.swift in Sources */,
 				551BE8CD26A4196C00D23038 /* ActivityCardComponentView.swift in Sources */,
 				55E1554326B4C0A2003C783C /* NotActivatedAccount.swift in Sources */,
@@ -1492,6 +1514,7 @@
 				55E5E03E26A7D4310092DBE2 /* MaterialView.swift in Sources */,
 				55E1554B26B4D9A2003C783C /* BecomeMemberViewModel.swift in Sources */,
 				553385C626A3C560009B1AEF /* PopupMenuComponentView.swift in Sources */,
+				5581134426DA0DD600FA0FB9 /* AdsProvider.swift in Sources */,
 				55E1557426B5B8BA003C783C /* ExamExerciseGlobalModel.swift in Sources */,
 				55FEDF2A26989031007D7C1A /* GlobalStaticData.swift in Sources */,
 				55B031EB269FB4C200ED3BC3 /* RegisterViewModel.swift in Sources */,
@@ -1527,6 +1550,7 @@
 				553385BE26A3B2E9009B1AEF /* TabBarIconComponentView.swift in Sources */,
 				553A7E4D26A3FC3600AE65D3 /* BannersCustomColorsComponentView.swift in Sources */,
 				55E5E03A26A7D30F0092DBE2 /* ActivityDetailView.swift in Sources */,
+				5581134026D9EC4000FA0FB9 /* AdsCardComponentView.swift in Sources */,
 				5538E5C126A65D5800431360 /* ActivityProvider.swift in Sources */,
 				55F8AFAC26ABBEDA00FA4B99 /* PublicationString.swift in Sources */,
 				55E389A726AF81950044DAD5 /* DeleteCommentProvider.swift in Sources */,
@@ -1759,6 +1783,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = id.filla.PiranhaSmartCenter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1783,6 +1808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = id.filla.PiranhaSmartCenter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

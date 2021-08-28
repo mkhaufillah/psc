@@ -42,6 +42,13 @@ struct SecureRequestGetProvider<ResponseModel: Codable> {
             if GlobalStaticData.isDebug {
                 print("[Realm error] Error when read token data")
             }
+            response(nil, AppError(desc: ErrorString.InvalidToken))
+            return
+        }
+        
+        if token == "" {
+            response(nil, AppError(desc: ErrorString.InvalidToken))
+            return
         }
         
         // Create the url request

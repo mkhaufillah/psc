@@ -31,7 +31,7 @@ class PublicationListViewModel: ObservableObject {
         publicationProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    if isNextPage && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                    if isNextPage && ((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                         self.dataStatusPublicationsPerPage = .InNetwork
                         self.isPublicationFinalPage = true
                     } else {

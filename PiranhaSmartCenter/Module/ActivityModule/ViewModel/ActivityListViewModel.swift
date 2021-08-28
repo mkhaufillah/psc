@@ -31,7 +31,7 @@ class ActivityListViewModel: ObservableObject {
         activityProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    if isNextPage && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                    if isNextPage && ((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                         self.dataStatusActivitiesPerPage = .InNetwork
                         self.isActivityFinalPage = true
                     } else {

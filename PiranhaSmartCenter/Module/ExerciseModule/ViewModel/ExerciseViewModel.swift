@@ -85,14 +85,14 @@ class ExerciseViewModel: ObservableObject {
             // Set result to local data
             DispatchQueue.main.async {
                 if error != nil {
-                    if isSearch && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                    if isSearch && ((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                         self.dataMaterials[i] = []
                         self.dataStatusMaterials[i] = .InNetwork
-                    } else if isNextPage && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                    } else if isNextPage && ((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                         self.dataStatusMaterialsPerPage[i] = .InNetwork
                         self.isFinalPage[i] = true
                     } else {
-                        if self.materialKeyword != "" && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                        if self.materialKeyword != "" && ((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                             self.dataMaterials[i] = []
                             self.dataStatusMaterials[i] = .InNetwork
                         } else {
@@ -136,11 +136,11 @@ class ExerciseViewModel: ObservableObject {
         getResultExerciseProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
-                    if isNextPage && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                    if isNextPage && ((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                         self.dataStatusHistoriesPerPage = .InNetwork
                         self.isHistoryFinalPage = true
                     } else {
-                        if (error?.desc ?? "") != ErrorString.decodeFailed {
+                        if !((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                             NotificationComponentView.showErrorNotification(title: ErrorString.title, subtitle: error?.desc ?? "")
                         } else {
                             NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle, subtitle: ErrorString.notFoundData)

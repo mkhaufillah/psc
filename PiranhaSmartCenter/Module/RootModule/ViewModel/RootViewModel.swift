@@ -32,6 +32,7 @@ class RootViewModel: ObservableObject {
     @Published var dataStatusMaterialsPerPage = [DataStatus]()
     @Published var dataStatusPublications: DataStatus = .Init
     @Published var dataStatusActivities: DataStatus = .Init
+    @Published var dataStatusAds: DataStatus = .Init
     
     @Published var dataUser: UserModel? = nil
     @Published var dataRecapCourses = Array<RecapCourseModel>()
@@ -39,6 +40,7 @@ class RootViewModel: ObservableObject {
     @Published var dataMaterials = [Array<MaterialModel>]()
     @Published var dataPublications = Array<PublicationModel>()
     @Published var dataActivities = Array<ActivityModel>()
+    @Published var dataAds = Array<AdsModel>()
     
     @Published var currentTab: PageTab = .Home
     @Published var isShowPopupMenu = false
@@ -51,6 +53,11 @@ class RootViewModel: ObservableObject {
     
     @Published var statusConnection = 1
     
+    @Published var isFirstTime = false
+    @Published var indexOnboard = 0
+    
+    @Published var isOpenAds: Bool = true
+    
     @Published var homeRefresh: Bool = false {
         didSet {
             if oldValue == false && homeRefresh == true {
@@ -58,6 +65,7 @@ class RootViewModel: ObservableObject {
                 initDataRecapCoursesFromNetwork()
                 initDataActivitiesFromNetwork()
                 initDataPublicationsFromNetwork()
+                initDataAdsFromNetwork()
             }
         }
     }
@@ -81,6 +89,7 @@ class RootViewModel: ObservableObject {
     let courseProvider = CourseProvider()
     let publicationProvider = PublicationProvider(page: 1)
     let activityProvider = ActivityProvider(page: 1)
+    let adsProvider = AdsProvider()
     
     init() {
         // Network
@@ -104,6 +113,8 @@ class RootViewModel: ObservableObject {
             let data = realm.objects(SignInDataModel.self)
             dataUser = data.first?.user
             
+            isFirstTime = realm.objects(OnBoardModel.self).first?.isFirstTime ?? true
+            
             if dataUser == nil {
                 dataStatusUser = .NotInLocal
             }
@@ -117,17 +128,47 @@ class RootViewModel: ObservableObject {
         }
     }
     
+    func finishOnBoard() {
+        do {
+            // Save into local data with realm
+            try self.saveOnboardData()
+        } catch {
+            do {
+                try FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+                
+                try self.saveOnboardData()
+            } catch {
+                if GlobalStaticData.isDebug {
+                    print("[Realm error] Error when write onboard data")
+                }
+            }
+        }
+    }
+    
+    func saveOnboardData() throws {
+        // Save into local data with realm
+        let realm = try Realm()
+        try realm.write {
+            // Delete data first
+            realm.deleteAll()
+            realm.add(OnBoardModel())
+        }
+        isFirstTime = false
+    }
+    
     func resetAllData() {
         dataStatusUser = .Init
         dataStatusRecapCourses = .Init
         dataStatusCourses = .Init
         dataStatusPublications = .Init
         dataStatusActivities = .Init
+        dataStatusAds = .Init
         dataUser = nil
         dataRecapCourses = []
         dataCourses = []
         dataPublications = []
         dataActivities = []
+        dataAds = []
     }
     
     func initDataUserFromNetwork() {
@@ -138,6 +179,20 @@ class RootViewModel: ObservableObject {
                 if error != nil {
                     NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle + RootString.getUserData, subtitle: error?.desc ?? "")
                     self.dataStatusUser = .InLocal
+                    if error?.desc == ErrorString.InvalidToken || (error?.desc ?? "").contains(ErrorString.decodeFailedTag) {
+                        do {
+                            // Delete data from realm
+                            let realm = try Realm()
+                            try realm.write {
+                                realm.deleteAll()
+                            }
+                        } catch {
+                            if GlobalStaticData.isDebug {
+                                print("[Realm error] Error when delete user data")
+                            }
+                        }
+                        self.resetAllData()
+                    }
                 }
                 if result != nil {
                     self.dataUser = result?.data?.data.first
@@ -268,14 +323,14 @@ class RootViewModel: ObservableObject {
             // Set result to local data
             DispatchQueue.main.async {
                 if error != nil {
-                    if isSearch && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                    if isSearch && ((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                         self.dataMaterials[i] = []
                         self.dataStatusMaterials[i] = .InNetwork
-                    } else if isNextPage && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                    } else if isNextPage && ((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                         self.dataStatusMaterialsPerPage[i] = .InNetwork
                         self.isFinalPage[i] = true
                     } else {
-                        if self.materialKeyword != "" && ((error?.desc ?? "") == ErrorString.decodeFailed) {
+                        if self.materialKeyword != "" && ((error?.desc ?? "").contains(ErrorString.decodeFailedTag)) {
                             self.dataMaterials[i] = []
                             self.dataStatusMaterials[i] = .InNetwork
                         } else {
@@ -337,6 +392,25 @@ class RootViewModel: ObservableObject {
                 if result != nil {
                     self.dataActivities = RealmListHelper<ActivityModel>().listToArray(list: result?.data?.data ?? List<ActivityModel>())
                     self.dataStatusActivities = .InNetwork
+                }
+                self.homeRefresh = false
+            }
+        })
+    }
+    
+    func initDataAdsFromNetwork() {
+        // Get publications from network
+        self.dataStatusAds = .InProgressToNetwork
+        adsProvider.doAction(response: { result, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle + RootString.getPublicationsData, subtitle: error?.desc ?? "")
+                    self.dataStatusAds = .NotInLocal
+                }
+                
+                if result != nil {
+                    self.dataAds = RealmListHelper<AdsModel>().listToArray(list: result?.data?.data ?? List<AdsModel>())
+                    self.dataStatusAds = .InNetwork
                 }
                 self.homeRefresh = false
             }

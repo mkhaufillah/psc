@@ -22,5 +22,16 @@ struct RootString : StringProtocol {
     static let getPublicationsData = " pengambilan data publikasi"
     static let getAcyivitiesData = " pengambilan data aktivitas"
     static let refreshingData = "Memuat ulang data"
+    // OnBoard
+    static let next = "Berikutnya"
+    static let start = "Mulai"
+    static let title1 = "Selamat datang di PSC E-Brevet!"
+    static let desc1 = "Layanan Aplikasi Belajar Online Brevet A dan B Melalui Video Interaktif Mudah dan Fleksibel"
+    static let title2 = "Mudah dan Fleksibel"
+    static let desc2 = "Kamu bisa mendapatkan kemudahan akses video materi secara gratis dan seumur hidup"
+    static let title3 = "Akun Premium untuk Layanan Maksimal"
+    static let desc3 = "Update Video Materi serta Soal-soal Latihan lengkap, untuk kemudahan Sertifikasi dan Kompetensimu"
+    static let title4 = "Dapatkan Sertifikat Brevet dan Kompetensi BNSP"
+    static let desc4 = "Dengan memperbarui akun kamu ke Akun Premium, maka kamu bisa mendapatkan Sertifikat dan Kompetensi BNSP"
 }
 
