@@ -185,7 +185,7 @@ struct HomeView: View {
                         AdsCardComponentView(
                             url: rootViewModel.dataStatusAds != .InNetwork &&
                                 rootViewModel.dataAds.count <= 0
-                                ? "" : rootViewModel.dataAds[0].photo
+                                ? nil : rootViewModel.dataAds[0].photo
                         )
                         Button(action: {
                             withAnimation(.easeInOut) {
