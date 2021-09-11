@@ -38,6 +38,8 @@ struct ErrorString : StringProtocol {
     // static let requiredAddress = "\"Alamat\" belum terisi"
     // static let requiredEducation = "\"Pendidikan\" belum terisi"
     
+    static let requiredRefCode = "\"Kode Referensi\" belum terisi"
+    
     // Whatsapp
     static let whatsappCannotOpened = "\"Whatsapp\" tidak bisa dibuka"
     // Video

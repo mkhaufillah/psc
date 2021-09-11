@@ -19,6 +19,7 @@ struct RegisterRequestModel: RequestProtocol {
     var referenceId: String
     var detailReferenceEtc: String
     var education: String
+    var codeRefId: String
 }
 
 struct RegisterResponseModel: Codable, ResponseProtocol {

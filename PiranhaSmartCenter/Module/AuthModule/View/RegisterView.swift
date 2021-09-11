@@ -27,6 +27,9 @@ struct RegisterView: View {
                     NavigationLink(destination: RegisterNextView().environmentObject(registerViewModel), isActive: $registerViewModel.registerNextPageIsActive) {
                         EmptyView()
                     }
+                    NavigationLink(destination: ReferenceCodeSelectionView().environmentObject(registerViewModel), isActive: $registerViewModel.referenceCodePageIsActive) {
+                        EmptyView()
+                    }
                 }
                 Group {
                     // Name input
@@ -36,7 +39,7 @@ struct RegisterView: View {
                     TextFieldComponentView(text: $registerViewModel.email)
                         .primary(title: RegisterString.email, icon: "envelope", position: .left, type: .emailAddress, keyboardType: .emailAddress)
                     // Gender input
-                    ButtonComponentView.textFieldFullButton(title: registerViewModel.gender == "" ? RegisterString.gender : GenderHelper.getDesc(raw: registerViewModel.gender), action: {
+                    ButtonComponentView.textFieldFullButton(title: registerViewModel.gender == "" || registerViewModel.gender == "-" ? RegisterString.gender : GenderHelper.getDesc(raw: registerViewModel.gender), action: {
                         hideKeyboard()
                         registerViewModel.genderSelectionPageIsActive = true
                     }, leadingImg: "heart", traillingImg: "chevron.forward", isCenter: false)
@@ -55,7 +58,7 @@ struct RegisterView: View {
                     TextFieldComponentView(text: $registerViewModel.address)
                         .primary(title: RegisterString.address, icon: "map", position: .left, type: .fullStreetAddress, keyboardType: .default)
                     // References input
-                    ButtonComponentView.textFieldFullButton(title: registerViewModel.reference == "" ? RegisterString.reference : ReferenceHelper.getDesc(raw: registerViewModel.reference), action: {
+                    ButtonComponentView.textFieldFullButton(title: registerViewModel.reference == "" || registerViewModel.reference == "-" ? RegisterString.reference : ReferenceHelper.getDesc(raw: registerViewModel.reference), action: {
                         hideKeyboard()
                         registerViewModel.referenceSelectionPageIsActive = true
                     }, leadingImg: "info.circle", traillingImg: "chevron.forward", isCenter: false)
@@ -67,12 +70,18 @@ struct RegisterView: View {
                     }
                     TextFieldComponentView(text: $registerViewModel.education)
                         .primary(title: RegisterString.education, icon: "graduationcap", position: .left, keyboardType: .default)
-                    // Note
-                    if registerViewModel.note != "" {
-                        TickerComponentView.error(text: registerViewModel.note, onClickClose: {
-                            registerViewModel.note = ""
-                        })
-                    }
+                    // Reference code input
+                    ButtonComponentView.textFieldFullButton(title: registerViewModel.refCodeId == 0 ? RegisterString.refCode : registerViewModel.refCodeDesc, action: {
+                        hideKeyboard()
+                        registerViewModel.referenceCodePageIsActive = true
+                    }, leadingImg: "info.circle", traillingImg: "chevron.forward", isCenter: false)
+                    .lineLimit(1)
+                }
+                // Note
+                if registerViewModel.note != "" {
+                    TickerComponentView.error(text: registerViewModel.note, onClickClose: {
+                        registerViewModel.note = ""
+                    })
                 }
                 HStack(alignment: .center, spacing: 16) {
                     // Back to login page

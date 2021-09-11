@@ -20,6 +20,8 @@ struct RegisterString: StringProtocol {
     static let birthdate = "Tanggal Lahir (Opsional)"
     static let address = "Alamat (Opsional)"
     static let education = "Pendidikan Terakhir (Opsional)"
+    static let refCode = "Kode Referensi"
+    static let getRefCode = " mendapatkan kode referensi"
     
     static let register = "Daftar"
     static let newPassword = "Kata Sandi Baru"

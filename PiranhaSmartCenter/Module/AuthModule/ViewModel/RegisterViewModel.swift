@@ -22,16 +22,27 @@ class RegisterViewModel: ObservableObject {
     @Published var password = ""
     @Published var cPassword = ""
     @Published var note = ""
+    @Published var refCodeId = 0
+    @Published var refCodeDesc = ""
     @Published var isLoading = false
     @Published var genderSelectionPageIsActive = false
     @Published var referenceSelectionPageIsActive = false
     @Published var registerNextPageIsActive = false
+    @Published var referenceCodePageIsActive = false
     @Published var isSuccessRegister = false
     @Published var isShowPhotoLibrary = false
     @Published var isShowCamera = false
     @Published var isShowSelectionProfilePicture = false
     
+    @Published var dataStatusRefCodes: DataStatus = .Init
+    @Published var dataRefCodes: [ReferenceCodeModel] = []
+    let referenceCodeProvider = ReferenceCodeProvider()
+    
     var registerProvider = RegisterProvider()
+    
+    init() {
+        initDataRefCodesFromNetwork()
+    }
     
     func doRegister(postRegisterAction: @escaping () -> Void) {
         isLoading = true
@@ -47,7 +58,7 @@ class RegisterViewModel: ObservableObject {
             
             // Do action to register in server
             registerProvider.doAction(request: RegisterRequestModel(
-                name: name, email: email, password: password, cPassword: cPassword, gender: gender, picture: (picture ?? UIImage()).jpegData(compressionQuality: 0.7) ?? Data(), address: address, birthdate: birthdateConv, referenceId: reference, detailReferenceEtc: detailReference, education: education
+                name: name, email: email, password: password, cPassword: cPassword, gender: gender, picture: (picture ?? UIImage()).jpegData(compressionQuality: 0.7) ?? Data(), address: address, birthdate: birthdateConv, referenceId: reference, detailReferenceEtc: detailReference, education: education, codeRefId: "\(refCodeId)"
             ), response: { result, error in
                 DispatchQueue.main.async {
                     if result != nil {
@@ -89,6 +100,11 @@ class RegisterViewModel: ObservableObject {
         if reference == ReferenceHelper.others && detailReference == "" {
             note = ErrorString.requiredDetailReference
             return false
+        }
+        
+        if refCodeId == 0 {
+             note = ErrorString.requiredRefCode
+             return false
         }
         
         /// App store policy
@@ -147,5 +163,23 @@ class RegisterViewModel: ObservableObject {
         
         note = ""
         return true
+    }
+    
+    func initDataRefCodesFromNetwork() {
+        // Get publications from network
+        self.dataStatusRefCodes = .InProgressToNetwork
+        referenceCodeProvider.doAction(response: { result, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    NotificationComponentView.showErrorNotification(title: ErrorString.shortTitle + RegisterString.getRefCode, subtitle: error?.desc ?? "")
+                    self.dataStatusRefCodes = .NotInLocal
+                }
+                
+                if result != nil {
+                    self.dataRefCodes = RealmListHelper<ReferenceCodeModel>().listToArray(list: result?.data?.data ?? List<ReferenceCodeModel>())
+                    self.dataStatusRefCodes = .InNetwork
+                }
+            }
+        })
     }
 }

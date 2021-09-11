@@ -39,6 +39,7 @@ struct RegisterProvider: ProviderPostProtocol {
         req.addTextField(named: "reference_id", value: request.referenceId)
         req.addTextField(named: "detail_reference_etc", value: request.detailReferenceEtc)
         req.addTextField(named: "education", value: request.education)
+        req.addTextField(named: "code_ref_id", value: request.codeRefId)
         
         let config = URLSessionConfiguration.default
         config.waitsForConnectivity = true

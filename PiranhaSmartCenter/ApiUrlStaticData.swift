@@ -46,6 +46,7 @@ struct ApiUrlStatic {
     static let publication = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + "/cms/publication"
     static let activity = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + "/cms/activity"
     static let ads = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + "/cms/slider"
+    static let codeReference = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + "/cms/code_reference"
     
     // CMS Payment
     static let listBank = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + "/cms/bank_list"
