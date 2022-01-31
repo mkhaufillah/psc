@@ -55,7 +55,7 @@ private struct PrimaryChipStyleHelper: ButtonStyle {
             .foregroundColor(active ? Color("BackgroundColor") : Color.accentColor)
             .background(
                 RoundedRectangle(
-                    cornerRadius: 128,
+                    cornerRadius: 12,
                     style: .continuous
                 )
                 .stroke(
@@ -72,7 +72,7 @@ private struct PrimaryChipStyleHelper: ButtonStyle {
                         : LinearGradient(gradient: Gradient(colors: [Color("ForegroundLayer2Color"), Color("ForegroundLayer2Color")]), startPoint: .leading, endPoint: .trailing)
                 )
             )
-            .clipShape(RoundedRectangle(cornerRadius: 128))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
             .scaleEffect(configuration.isPressed ? 0.9 : 1)
             .opacity(configuration.isPressed ? 0.6 : 1)
             .animation(.easeOut(duration: 0.2), value: configuration.isPressed)

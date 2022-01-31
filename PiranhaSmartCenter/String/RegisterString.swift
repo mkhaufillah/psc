@@ -23,6 +23,17 @@ struct RegisterString: StringProtocol {
     static let refCode = "Kode Referensi"
     static let getRefCode = " mendapatkan kode referensi"
     
+    /// New fields 31 January 2022
+    static let nik = "NIK (Opsional)"
+    static let religion = "Agama (Opsional)"
+    static let birthPlace = "Tempat Lahir (Opsional)"
+    static let province = "Provinsi (Opsional)"
+    static let city = "Kota (Opsional)"
+    static let district = "Kecamatan (Opsional)"
+    static let village = "Desa (Opsional)"
+    static let nameMother = "Nama Ibu (Opsional)"
+    static let nameFather = "Nama Ayah (Opsional)"
+    
     static let register = "Daftar"
     static let newPassword = "Kata Sandi Baru"
     static let repeatNewPassword = "Tulis Ulang Kata Sandi Baru"

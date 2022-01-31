@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		45C163E6D9BF759AF132524F /* Pods_PiranhaSmartCenter_PiranhaSmartCenterUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F27172E241FC084DFF08B94 /* Pods_PiranhaSmartCenter_PiranhaSmartCenterUITests.framework */; };
+		550276ED27A75D0700197592 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550276EC27A75D0700197592 /* LocationModel.swift */; };
+		550276EF27A7606E00197592 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550276EE27A7606E00197592 /* LocationProvider.swift */; };
+		550276F127A77B1700197592 /* ProvinceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550276F027A77B1700197592 /* ProvinceSelectionView.swift */; };
+		550276F327A77B3000197592 /* CitySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550276F227A77B3000197592 /* CitySelectionView.swift */; };
+		550276F527A77B4400197592 /* DistrictSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550276F427A77B4400197592 /* DistrictSelectionView.swift */; };
+		550276F727A77B5800197592 /* VillageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550276F627A77B5800197592 /* VillageSelectionView.swift */; };
 		550DA3042693E6DB00C50597 /* PiranhaSmartCenterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550DA3032693E6DB00C50597 /* PiranhaSmartCenterApp.swift */; };
 		550DA3082693E6E400C50597 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 550DA3072693E6E400C50597 /* Assets.xcassets */; };
 		550DA30B2693E6E400C50597 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 550DA30A2693E6E400C50597 /* Preview Assets.xcassets */; };
@@ -205,6 +211,12 @@
 
 /* Begin PBXFileReference section */
 		3F27172E241FC084DFF08B94 /* Pods_PiranhaSmartCenter_PiranhaSmartCenterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PiranhaSmartCenter_PiranhaSmartCenterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		550276EC27A75D0700197592 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		550276EE27A7606E00197592 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
+		550276F027A77B1700197592 /* ProvinceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvinceSelectionView.swift; sourceTree = "<group>"; };
+		550276F227A77B3000197592 /* CitySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySelectionView.swift; sourceTree = "<group>"; };
+		550276F427A77B4400197592 /* DistrictSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictSelectionView.swift; sourceTree = "<group>"; };
+		550276F627A77B5800197592 /* VillageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VillageSelectionView.swift; sourceTree = "<group>"; };
 		550DA3002693E6DB00C50597 /* PiranhaSmartCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PiranhaSmartCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		550DA3032693E6DB00C50597 /* PiranhaSmartCenterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiranhaSmartCenterApp.swift; sourceTree = "<group>"; };
 		550DA3072693E6E400C50597 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1041,6 +1053,7 @@
 				55FEDF182697E236007D7C1A /* SignInModel.swift */,
 				55C62BD826A3214B004E18D5 /* RegisterModel.swift */,
 				55B1C24C26ECA27B00D6D35A /* RefenceCodeModel.swift */,
+				550276EC27A75D0700197592 /* LocationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1051,6 +1064,7 @@
 				55FEDF2226988B20007D7C1A /* SignInProvider.swift */,
 				55C62BDA26A3252B004E18D5 /* RegisterProvider.swift */,
 				55B1C24A26ECA1CF00D6D35A /* ReferenceCodeProvider.swift */,
+				550276EE27A7606E00197592 /* LocationProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -1090,6 +1104,10 @@
 				55B031E6269FAAF400ED3BC3 /* RegisterView.swift */,
 				55C62BC626A29C29004E18D5 /* GenderSelectionView.swift */,
 				55C62BCA26A2A29F004E18D5 /* ReferenceSelectionView.swift */,
+				550276F027A77B1700197592 /* ProvinceSelectionView.swift */,
+				550276F227A77B3000197592 /* CitySelectionView.swift */,
+				550276F427A77B4400197592 /* DistrictSelectionView.swift */,
+				550276F627A77B5800197592 /* VillageSelectionView.swift */,
 				55C62BD426A2D227004E18D5 /* RegisterNextView.swift */,
 				55B1C24826EC9CEF00D6D35A /* ReferenceCodeSelectionView.swift */,
 			);
@@ -1258,7 +1276,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1320;
 				TargetAttributes = {
 					550DA2FF2693E6DB00C50597 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -1460,14 +1478,18 @@
 				55B031E3269FA34300ED3BC3 /* ProfileView.swift in Sources */,
 				5581133E26D9D7F900FA0FB9 /* OnBoardComponentView.swift in Sources */,
 				55E1555E26B56C62003C783C /* ExerciseViewModel.swift in Sources */,
+				550276F327A77B3000197592 /* CitySelectionView.swift in Sources */,
+				550276ED27A75D0700197592 /* LocationModel.swift in Sources */,
 				55E1556026B5759B003C783C /* OnBoardExerciseView.swift in Sources */,
 				551BE8C526A418C600D23038 /* ShortUserInfoComponentView.swift in Sources */,
+				550276F727A77B5800197592 /* VillageSelectionView.swift in Sources */,
 				55FEDF3C26998689007D7C1A /* SignInString.swift in Sources */,
 				554393DB26A5C90E00D95FDA /* CourseModel.swift in Sources */,
 				55E1557E26B5BF21003C783C /* ExamQuestionProvider.swift in Sources */,
 				551BE8D126A4483400D23038 /* NotificationComponentView.swift in Sources */,
 				5538E5CD26A6D63700431360 /* DateHelper.swift in Sources */,
 				55E1558026B5BF3F003C783C /* PostAnswerExamProvider.swift in Sources */,
+				550276F127A77B1700197592 /* ProvinceSelectionView.swift in Sources */,
 				5538E5BC26A658A300431360 /* SecureRequestGetProvider.swift in Sources */,
 				555AC01A26B243560078D1AE /* ChildrenCommentComponentView.swift in Sources */,
 				5538E5B626A6567D00431360 /* SearchMaterialProvider.swift in Sources */,
@@ -1518,6 +1540,7 @@
 				5538E5C926A6AB1300431360 /* ExerciseString.swift in Sources */,
 				55E389A126AF7E8C0044DAD5 /* SecureRequestDeleteProvider.swift in Sources */,
 				55C62BD126A2BC1D004E18D5 /* HelperString.swift in Sources */,
+				550276EF27A7606E00197592 /* LocationProvider.swift in Sources */,
 				55FEDF4026998A37007D7C1A /* ErrorString.swift in Sources */,
 				55FEDF192697E236007D7C1A /* SignInModel.swift in Sources */,
 				55E5E03E26A7D4310092DBE2 /* MaterialView.swift in Sources */,
@@ -1542,6 +1565,7 @@
 				55E1556C26B58737003C783C /* GetAnswerExerciseModel.swift in Sources */,
 				553385C826A3DCE2009B1AEF /* ExamString.swift in Sources */,
 				55163AB8269C08B300FA0E0A /* SignInBackgroundComponentView.swift in Sources */,
+				550276F527A77B4400197592 /* DistrictSelectionView.swift in Sources */,
 				554393D326A5595700D95FDA /* MaterialCardComponentView.swift in Sources */,
 				554393D826A5C2A900D95FDA /* ProfileModel.swift in Sources */,
 				55E1557A26B5BEB2003C783C /* GetResultExerciseProvider.swift in Sources */,
@@ -1666,6 +1690,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1727,6 +1752,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1785,7 +1811,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PiranhaSmartCenter/Preview Content\"";
 				DEVELOPMENT_TEAM = SN388LM7MK;
 				ENABLE_PREVIEWS = YES;
@@ -1795,7 +1821,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = id.filla.PiranhaSmartCenter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1810,7 +1836,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PiranhaSmartCenter/Preview Content\"";
 				DEVELOPMENT_TEAM = SN388LM7MK;
 				ENABLE_PREVIEWS = YES;
@@ -1820,7 +1846,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = id.filla.PiranhaSmartCenter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

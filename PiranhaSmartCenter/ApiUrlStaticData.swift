@@ -74,4 +74,11 @@ struct ApiUrlStatic {
     
     // In app purchase
     static let inAppPurchase = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + "/user/in-app-purchase"
+    
+    // Location
+    private static let locationPath = "/location"
+    static let provinces = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + locationPath + "/province"
+    static let cities = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + locationPath + "/cities?province="
+    static let districts = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + locationPath + "/district?city="
+    static let villages = GlobalStaticData.baseUrl + BaseApiUrlStatic.base1 + VersionApiUrlStatic.version1 + locationPath + "/village?district="
 }

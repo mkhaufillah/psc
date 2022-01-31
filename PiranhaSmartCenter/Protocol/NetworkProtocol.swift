@@ -5,6 +5,15 @@
 //  Created by mohammad.khaufillah on 09/07/21.
 //
 
+import RealmSwift
+
+enum LocationType {
+    case PROVINCE
+    case CITY
+    case DISTRICT
+    case VILLAGE
+}
+
 protocol RequestProtocol {
 }
 
@@ -23,6 +32,11 @@ protocol ProviderPostProtocol {
 protocol ProviderGetProtocol {
     associatedtype Response
     func doAction(response: @escaping (Response?, AppError?) -> Void)
+}
+
+protocol ProviderGetProtocolLocation {
+    associatedtype List
+    func doAction(response: @escaping (List?, AppError?) -> Void, locationType: LocationType, params: String)
 }
 
 protocol ProviderPostProtocolWithOptionalData {

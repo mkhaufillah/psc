@@ -30,6 +30,18 @@ struct RegisterView: View {
                     NavigationLink(destination: ReferenceCodeSelectionView().environmentObject(registerViewModel), isActive: $registerViewModel.referenceCodePageIsActive) {
                         EmptyView()
                     }
+                    NavigationLink(destination: ProvinceSelectionView().environmentObject(registerViewModel), isActive: $registerViewModel.selectProvinceIsActive) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: CitySelectionView().environmentObject(registerViewModel), isActive: $registerViewModel.selectCityIsActive) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: DistrictSelectionView().environmentObject(registerViewModel), isActive: $registerViewModel.selectDistrictIsActive) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: VillageSelectionView().environmentObject(registerViewModel), isActive: $registerViewModel.selectVillageIsActive) {
+                        EmptyView()
+                    }
                 }
                 Group {
                     // Name input
@@ -62,7 +74,7 @@ struct RegisterView: View {
                         hideKeyboard()
                         registerViewModel.referenceSelectionPageIsActive = true
                     }, leadingImg: "info.circle", traillingImg: "chevron.forward", isCenter: false)
-                    .lineLimit(1)
+                        .lineLimit(1)
                     // Reference detail input
                     if (registerViewModel.reference == ReferenceHelper.others) {
                         TextFieldComponentView(text: $registerViewModel.detailReference)
@@ -75,7 +87,55 @@ struct RegisterView: View {
                         hideKeyboard()
                         registerViewModel.referenceCodePageIsActive = true
                     }, leadingImg: "info.circle", traillingImg: "chevron.forward", isCenter: false)
-                    .lineLimit(1)
+                        .lineLimit(1)
+                }
+                // New field 31 January 2022
+                Group {
+                    // NIK input
+                    TextFieldComponentView(text: $registerViewModel.nik)
+                        .primary(title: RegisterString.nik, icon: "person.text.rectangle", position: .left, type: .name, keyboardType: .numberPad)
+                    // Religion input
+                    TextFieldComponentView(text: $registerViewModel.religion)
+                        .primary(title: RegisterString.religion, icon: "rectangle.and.pencil.and.ellipsis", position: .left, type: .name, keyboardType: .default)
+                    // BirthPlace input
+                    TextFieldComponentView(text: $registerViewModel.birthPlace)
+                        .primary(title: RegisterString.birthPlace, icon: "rectangle.and.pencil.and.ellipsis", position: .left, type: .name, keyboardType: .default)
+                    // province input
+                    ButtonComponentView.textFieldFullButton(title: registerViewModel.provinceId == 0 || registerViewModel.provinceName == "" || registerViewModel.provinceName == "-" ? RegisterString.province : registerViewModel.provinceName, action: {
+                        hideKeyboard()
+                        registerViewModel.selectProvinceIsActive = true
+                    }, leadingImg: "rectangle.and.pencil.and.ellipsis", traillingImg: "chevron.forward", isCenter: false)
+                        .lineLimit(1)
+                    // city input
+                    if registerViewModel.provinceId != 0 {
+                        ButtonComponentView.textFieldFullButton(title: registerViewModel.cityId == 0 || registerViewModel.cityName == "" || registerViewModel.cityName == "-" ? RegisterString.city : registerViewModel.cityName, action: {
+                            hideKeyboard()
+                            registerViewModel.selectCityIsActive = true
+                        }, leadingImg: "rectangle.and.pencil.and.ellipsis", traillingImg: "chevron.forward", isCenter: false)
+                            .lineLimit(1)
+                    }
+                    // district input
+                    if registerViewModel.cityId != 0 {
+                        ButtonComponentView.textFieldFullButton(title: registerViewModel.districtId == 0 || registerViewModel.districtName == "" ||  registerViewModel.districtName == "-" ? RegisterString.district : registerViewModel.districtName, action: {
+                            hideKeyboard()
+                            registerViewModel.selectDistrictIsActive = true
+                        }, leadingImg: "rectangle.and.pencil.and.ellipsis", traillingImg: "chevron.forward", isCenter: false)
+                            .lineLimit(1)
+                    }
+                    // village input
+                    if registerViewModel.districtId != 0 {
+                        ButtonComponentView.textFieldFullButton(title: registerViewModel.villageId == 0 || registerViewModel.villageName == "" ||  registerViewModel.villageName == "-" ? RegisterString.village : registerViewModel.villageName, action: {
+                            hideKeyboard()
+                            registerViewModel.selectVillageIsActive = true
+                        }, leadingImg: "rectangle.and.pencil.and.ellipsis", traillingImg: "chevron.forward", isCenter: false)
+                            .lineLimit(1)
+                    }
+                    // MotherName input
+                    TextFieldComponentView(text: $registerViewModel.nameMother)
+                        .primary(title: RegisterString.nameMother, icon: "rectangle.and.pencil.and.ellipsis", position: .left, type: .name, keyboardType: .default)
+                    // FatherName input
+                    TextFieldComponentView(text: $registerViewModel.nameFather)
+                        .primary(title: RegisterString.nameFather, icon: "rectangle.and.pencil.and.ellipsis", position: .left, type: .name, keyboardType: .default)
                 }
                 // Note
                 if registerViewModel.note != "" {

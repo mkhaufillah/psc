@@ -40,6 +40,16 @@ struct RegisterProvider: ProviderPostProtocol {
         req.addTextField(named: "detail_reference_etc", value: request.detailReferenceEtc)
         req.addTextField(named: "education", value: request.education)
         req.addTextField(named: "code_ref_id", value: request.codeRefId)
+        // New fields 31 January 2022
+        req.addTextField(named: "nik", value: request.nik)
+        req.addTextField(named: "religion", value: request.religion)
+        req.addTextField(named: "birth_place", value: request.birthPlace)
+        req.addTextField(named: "province_id", value: request.provinceId == 0 ? "" : "\(request.provinceId)")
+        req.addTextField(named: "city_id", value: request.cityId == 0 ? "" : "\(request.cityId)")
+        req.addTextField(named: "district_id", value: request.districtId == 0 ? "" : "\(request.districtId)")
+        req.addTextField(named: "village_id", value: request.villageId == 0 ? "" : "\(request.villageId)")
+        req.addTextField(named: "name_mother", value: request.nameMother)
+        req.addTextField(named: "name_father", value: request.nameFather)
         
         let config = URLSessionConfiguration.default
         config.waitsForConnectivity = true

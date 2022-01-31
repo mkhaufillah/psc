@@ -20,6 +20,16 @@ struct RegisterRequestModel: RequestProtocol {
     var detailReferenceEtc: String
     var education: String
     var codeRefId: String
+    // New fields 31 January 2022
+    var nik: String
+    var religion: String
+    var birthPlace: String
+    var provinceId: Int
+    var cityId: Int
+    var districtId: Int
+    var villageId: Int
+    var nameMother: String
+    var nameFather: String
 }
 
 struct RegisterResponseModel: Codable, ResponseProtocol {
