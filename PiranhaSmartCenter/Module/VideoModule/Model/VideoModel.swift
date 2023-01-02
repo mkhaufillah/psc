@@ -23,6 +23,8 @@ class VideoModel: Object, Codable, Identifiable {
     @objc dynamic var id = 0
     @objc dynamic var videoName: String?
     @objc dynamic var videoPath: String?
+    @objc dynamic var videoPath480: String?
+    @objc dynamic var videoPath360: String?
     @objc dynamic var totalViews: String?
     @objc dynamic var videoType: String?
     @objc dynamic var createdAt: String?
@@ -42,6 +44,8 @@ class VideoModel: Object, Codable, Identifiable {
         case id = "videoId"
         case videoName
         case videoPath
+        case videoPath480
+        case videoPath360
         case totalViews
         case videoType
         case createdAt

@@ -102,8 +102,27 @@ struct MaterialDetailView: View {
                                                             action: {
                                                                 if (video.videoType == "premium" && rootViewModel.dataUser?.statusAccount == "verified") || video.videoType == "free" {
                                                                     materialViewModel.selectedVideo = video
-                                                                    materialViewModel.player = AVPlayer(url: URL(string: video.path!)!)
-                                                                    materialViewModel.videoPageIsActive = true
+                                                                    var path = ""
+                                                                    var isValidPath = false
+                                                                    if video.path360 != nil {
+                                                                        path = video.path360!
+                                                                        materialViewModel.playerRes = .p360
+                                                                        isValidPath = true
+                                                                    } else if video.path480 != nil {
+                                                                        path = video.path480!
+                                                                        materialViewModel.playerRes = .p480
+                                                                        isValidPath = true
+                                                                    } else if video.path != nil {
+                                                                        path = video.path!
+                                                                        materialViewModel.playerRes = .p
+                                                                        isValidPath = true
+                                                                    }
+                                                                    if isValidPath {
+                                                                        materialViewModel.player = AVPlayer(url: URL(string: path)!)
+                                                                        materialViewModel.videoPageIsActive = true
+                                                                    } else {
+                                                                        NotificationComponentView.showErrorNotification(title: MaterialString.errorVideoOpenTitle, subtitle: MaterialString.errorVideoOpenSubtitle)
+                                                                    }
                                                                 } else {
                                                                     materialViewModel.isOpenBecomeMemberRecomendation = true
                                                                 }

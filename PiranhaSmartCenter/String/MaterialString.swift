@@ -11,4 +11,6 @@ struct MaterialString : StringProtocol {
     static let premiumMemberAlertTitle = "Anda tidak memiliki akses ke video"
     static let premiumMemberAlertSubitle = "Untuk dapat mengakses video, anda harus menjadi member aktif"
     static let premiumMemberAlertDesc = "Menu menjadi member bisa diakses di \"Profile / Menjadi Member\""
+    static let errorVideoOpenTitle = "Video tidak bisa diputar"
+    static let errorVideoOpenSubtitle = "Path dalam video kosong, silahkan hubungi admin PSC"
 }

@@ -9,6 +9,12 @@ import Foundation
 import RealmSwift
 import AVKit
 
+enum ResolutionVideo {
+    case p
+    case p360
+    case p480
+}
+
 class MaterialViewModel: ObservableObject {
     @Published var selectedChapter = 0
     @Published var dataStatusVideos = [Int: DataStatus]()
@@ -16,6 +22,7 @@ class MaterialViewModel: ObservableObject {
     
     @Published var selectedVideo: ShortVideoModel?
     @Published var player: AVPlayer?
+    @Published var playerRes: ResolutionVideo?
     @Published var videoPageIsActive = false
     
     @Published var isOpenBecomeMemberRecomendation = false

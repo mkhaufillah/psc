@@ -59,6 +59,8 @@ class ShortVideoModel: Object, Codable, Identifiable {
     @objc dynamic var id = 0
     @objc dynamic var name: String?
     @objc dynamic var path: String?
+    @objc dynamic var path480: String?
+    @objc dynamic var path360: String?
     @objc dynamic var chapterId: String?
     @objc dynamic var totalViews: String?
     @objc dynamic var videoType: String?
@@ -71,6 +73,8 @@ class ShortVideoModel: Object, Codable, Identifiable {
         case id
         case name
         case path
+        case path480
+        case path360
         case chapterId
         case totalViews
         case videoType

@@ -36,7 +36,7 @@ struct VideoView: View {
                     ZStack{
                         VideoPlayer(player: $materialViewModel.player)
                         if videoViewModel.showcontrols {
-                            Controls(player: $materialViewModel.player, isPlaying: $videoViewModel.isPlaying, pannel: $videoViewModel.showcontrols,value: $videoViewModel.value)
+                            Controls(player: $materialViewModel.player, isPlaying: $videoViewModel.isPlaying, pannel: $videoViewModel.showcontrols,value: $videoViewModel.value, resolution: $materialViewModel.playerRes, video: video)
                         }
                     }
                     .frame(width: bounds.size.height * 1.7777777778, height: bounds.size.height)
@@ -74,7 +74,7 @@ struct VideoView: View {
                         ZStack{
                             VideoPlayer(player: $materialViewModel.player)
                             if videoViewModel.showcontrols {
-                                Controls(player: $materialViewModel.player, isPlaying: $videoViewModel.isPlaying, pannel: $videoViewModel.showcontrols,value: $videoViewModel.value)
+                                Controls(player: $materialViewModel.player, isPlaying: $videoViewModel.isPlaying, pannel: $videoViewModel.showcontrols,value: $videoViewModel.value, resolution: $materialViewModel.playerRes, video: video)
                             }
                         }
                         .frame(width: bounds.size.width, height: bounds.size.width / 1.7777777778)
@@ -237,6 +237,8 @@ struct Controls : View {
     @Binding var isPlaying : Bool
     @Binding var pannel : Bool
     @Binding var value : Float
+    @Binding var resolution : ResolutionVideo?
+    var video: ShortVideoModel
     
     var body : some View{
         VStack{
@@ -283,6 +285,35 @@ struct Controls : View {
             Spacer()
             HStack {
                 CustomProgressBar(value: $value, player: $player, isPlaying: $isPlaying)
+                Button(action: {
+                    player!.pause()
+                    isPlaying = false
+                    if (resolution == .p360 && video.path480 != nil) {
+                        player!.replaceCurrentItem(with: AVPlayerItem(url: URL(string: video.path480!)!))
+                        resolution = .p480
+                    } else if (resolution == .p360 && video.path != nil) {
+                        player!.replaceCurrentItem(with: AVPlayerItem(url: URL(string: video.path!)!))
+                        resolution = .p
+                    } else if (resolution == .p480 && video.path360 != nil) {
+                        player!.replaceCurrentItem(with: AVPlayerItem(url: URL(string: video.path360!)!))
+                        resolution = .p360
+                    } else if (resolution == .p480 && video.path != nil) {
+                        player!.replaceCurrentItem(with: AVPlayerItem(url: URL(string: video.path!)!))
+                        resolution = .p
+                    } else if (resolution == .p && video.path360 != nil) {
+                        player!.replaceCurrentItem(with: AVPlayerItem(url: URL(string: video.path360!)!))
+                        resolution = .p360
+                    } else if (resolution == .p && video.path480 != nil) {
+                        player!.replaceCurrentItem(with: AVPlayerItem(url: URL(string: video.path480!)!))
+                        resolution = .p480
+                    }
+                    player!.play()
+                    isPlaying = true
+                }){
+                    Text(resolution == .p360 ? "360p" : resolution == .p480 ? "480p" : "default")
+                        .foregroundColor(.white)
+                }
+                .buttonStyle(DefaultButtonStyleHelper())
                 Button(action: {
                     if UIDevice.current.orientation.isLandscape {
                         DispatchQueue.main.async {

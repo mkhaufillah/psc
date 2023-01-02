@@ -173,7 +173,6 @@ class RootViewModel: ObservableObject {
     
     func initDataUserFromNetwork() {
         // Get user from network
-        self.dataStatusUser = .InProgressToNetwork
         profileProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
@@ -236,7 +235,6 @@ class RootViewModel: ObservableObject {
     
     func initDataRecapCoursesFromNetwork() {
         // Get publications from network
-        self.dataStatusRecapCourses = .InProgressToNetwork
         recapCourseProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
@@ -362,7 +360,6 @@ class RootViewModel: ObservableObject {
     
     func initDataPublicationsFromNetwork() {
         // Get publications from network
-        self.dataStatusPublications = .InProgressToNetwork
         publicationProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
@@ -381,7 +378,6 @@ class RootViewModel: ObservableObject {
     
     func initDataActivitiesFromNetwork() {
         // Get activities from network
-        self.dataStatusActivities = .InProgressToNetwork
         activityProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
@@ -400,7 +396,6 @@ class RootViewModel: ObservableObject {
     
     func initDataAdsFromNetwork() {
         // Get publications from network
-        self.dataStatusAds = .InProgressToNetwork
         adsProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
