@@ -44,7 +44,7 @@ struct CourseCardComponentView: View {
     
     var content: some View {
         Group {
-            HStack {
+            HStack() {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(name ?? HomeString.loadCourseName)
                         .fontWeight(.bold)

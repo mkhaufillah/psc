@@ -39,46 +39,50 @@ struct MaterialCardComponentView: View {
             .buttonStyle(DefaultButtonStyleHelper())
         } else {
             if isExercise {
-                ZStack {
-                    // for bugs reason
-                    NavigationLink(destination: EmptyView()) {
-                        EmptyView()
+                Group {
+                    ZStack {
+                        // for bugs reason
+                        NavigationLink(destination: EmptyView()) {
+                            EmptyView()
+                        }
+                        // ----
+                        NavigationLink(
+                            destination: OnBoardExerciseView(material: material!)
+                                .environmentObject(exerciseViewModel),
+                            tag: material!.id,
+                            selection: $exerciseViewModel.onboardingPageIsActive
+                        ) {
+                            content
+                        }
+                        .buttonStyle(DefaultButtonStyleHelper())
+                        // for bugs reason
+                        NavigationLink(destination: EmptyView()) {
+                            EmptyView()
+                        }
+                        // ----
                     }
-                    // ----
-                    NavigationLink(
-                        destination: OnBoardExerciseView(material: material!)
-                            .environmentObject(exerciseViewModel),
-                        tag: material!.id,
-                        selection: $exerciseViewModel.onboardingPageIsActive
-                    ) {
-                        content
-                    }
-                    .buttonStyle(DefaultButtonStyleHelper())
-                    // for bugs reason
-                    NavigationLink(destination: EmptyView()) {
-                        EmptyView()
-                    }
-                    // ----
                 }
             } else {
-                ZStack {
-                    // for bugs reason
-                    NavigationLink(destination: EmptyView()) {
-                        EmptyView()
+                Group {
+                    ZStack {
+                        // for bugs reason
+                        NavigationLink(destination: EmptyView()) {
+                            EmptyView()
+                        }
+                        // ----
+                        NavigationLink(
+                            destination: MaterialDetailView(material: material!, image: $image)
+                                .environmentObject(rootViewModel)
+                        ) {
+                            content
+                        }
+                        .buttonStyle(DefaultButtonStyleHelper())
+                        // for bugs reason
+                        NavigationLink(destination: EmptyView()) {
+                            EmptyView()
+                        }
+                        // ----
                     }
-                    // ----
-                    NavigationLink(
-                        destination: MaterialDetailView(material: material!, image: $image)
-                            .environmentObject(rootViewModel)
-                    ) {
-                        content
-                    }
-                    .buttonStyle(DefaultButtonStyleHelper())
-                    // for bugs reason
-                    NavigationLink(destination: EmptyView()) {
-                        EmptyView()
-                    }
-                    // ----
                 }
             }
         }

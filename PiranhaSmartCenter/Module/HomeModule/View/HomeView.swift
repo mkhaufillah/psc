@@ -68,7 +68,7 @@ struct HomeView: View {
                                                 }
                                             }
                                             ScrollView(.horizontal) {
-                                                HStack {
+                                                HStack(spacing: 8) {
                                                     if (rootViewModel.dataStatusPublications == .InProgressToNetwork) {
                                                         PublicationCardComponentView()
                                                         PublicationCardComponentView()
@@ -95,7 +95,7 @@ struct HomeView: View {
                                                 }
                                             }
                                             ScrollView(.horizontal) {
-                                                HStack {
+                                                HStack(spacing: 8) {
                                                     if (rootViewModel.dataStatusActivities == .InProgressToNetwork) {
                                                         ActivityCardComponentView()
                                                         ActivityCardComponentView()

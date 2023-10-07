@@ -268,10 +268,6 @@ class RootViewModel: ObservableObject {
     }
     
     func initDataCoursesFromNetwork() {
-        materialKeyword = ""
-        selectedCourseIdx = 0
-        // Get courses from network
-        self.dataStatusCourses = .InProgressToNetwork
         courseProvider.doAction(response: { result, error in
             DispatchQueue.main.async {
                 if error != nil {
