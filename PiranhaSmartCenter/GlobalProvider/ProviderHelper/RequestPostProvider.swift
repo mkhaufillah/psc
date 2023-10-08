@@ -45,14 +45,8 @@ struct RequestPostProvider<RequestModel: Codable, ResponseModel: Codable> {
         req.setValue("application/json", forHTTPHeaderField: "Accept")
         req.httpBody = requestData
         
-        let config = URLSessionConfiguration.default
-        config.waitsForConnectivity = true
-        config.timeoutIntervalForResource = 300
-        
-        let session = URLSession(configuration: config)
-        
         // Execute request
-        session.dataTask(with: req) { data, res, error in
+        URLSession.shared.dataTask(with: req) { data, res, error in
             let (responseData, errorData) = ResponseProvider<ResponseModel>().responseResult(data: data, res: res, error: error)
             response(responseData, errorData)
         }.resume()
