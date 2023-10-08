@@ -101,7 +101,7 @@ struct HistoryExamView: View {
                                                 .fontWeight(.bold)
                                                 .lineLimit(1)
                                                 .padding(.top, 8)
-                                            Text(DateHelper.stringToRelativeDate(s: history.createdAt ?? "", format: "dd/MM/yyyy HH:mm"))
+                                            Text(history.createdAt ?? "")
                                                 .lineLimit(1)
                                                 .padding(.top, 8)
                                         }

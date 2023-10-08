@@ -39,7 +39,7 @@ struct VideoView: View {
                             Controls(player: $materialViewModel.player, isPlaying: $videoViewModel.isPlaying, pannel: $videoViewModel.showcontrols,value: $videoViewModel.value, resolution: $materialViewModel.playerRes, video: video)
                         }
                     }
-                    .frame(width: bounds.size.height * 1.7777777778, height: bounds.size.height)
+                    .frame(width: bounds.size.width, height: bounds.size.height)
                     .onTapGesture {
                         videoViewModel.showcontrols = true
                     }
@@ -319,15 +319,14 @@ struct Controls : View {
                         DispatchQueue.main.async {
                             AppDelegate.orientationLock = UIInterfaceOrientationMask.portrait
                             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                            UINavigationController.attemptRotationToDeviceOrientation()
                         }
                     } else {
                         DispatchQueue.main.async {
                             AppDelegate.orientationLock = UIInterfaceOrientationMask.landscapeRight
                             UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-                            UINavigationController.attemptRotationToDeviceOrientation()
                         }
                     }
+                    UINavigationController.attemptRotationToDeviceOrientation()
                 }) {
                     Image(systemName: UIDevice.current.orientation.isLandscape ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right")
                         .foregroundColor(.white)

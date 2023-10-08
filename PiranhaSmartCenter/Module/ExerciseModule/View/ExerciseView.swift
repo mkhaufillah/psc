@@ -165,7 +165,7 @@ struct ExerciseView: View {
         ) { iCourse, course in
             if exerciseViewModel.selectedCourseIdx == iCourse {
                 if exerciseViewModel.dataStatusMaterials[iCourse] == .InNetwork {
-                    VStack {
+                    VStack(spacing: 16) {
                         if exerciseViewModel.dataMaterials[iCourse].count <= 0 {
                             Divider()
                                 .padding(.top)

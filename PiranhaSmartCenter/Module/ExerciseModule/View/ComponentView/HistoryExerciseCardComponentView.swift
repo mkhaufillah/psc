@@ -95,7 +95,7 @@ struct HistoryExerciseCardComponentView: View {
                         .fontWeight(.bold)
                         .lineLimit(1)
                         .padding(.top, 8)
-                    Text(DateHelper.stringToRelativeDate(s: historyExercise?.createdAt ?? "", format: "dd/MM/yyyy HH:mm"))
+                    Text(historyExercise?.createdAt ?? "")
                         .lineLimit(1)
                         .padding(.top, 8)
                 }
