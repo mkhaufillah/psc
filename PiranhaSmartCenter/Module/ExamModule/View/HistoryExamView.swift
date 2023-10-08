@@ -56,7 +56,7 @@ struct HistoryExamView: View {
                             ) { history in
                                 Group {
                                     HStack() {
-                                        VStack(alignment: .leading, spacing: 8) {
+                                        VStack(alignment: .leading, spacing: 16) {
                                             Text(history.name ?? ExerciseString.loadHistoryName)
                                                 .fontWeight(.bold)
                                                 .lineLimit(2)
